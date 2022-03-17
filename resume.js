@@ -71,11 +71,11 @@ function getResUser(){
         }
     }
 
-    let langs = document.querySelector('#lang-section').querySelectorAll('.cv-field-lang');
+    let languages = document.querySelector('#lang-section').querySelectorAll('.cv-field-lang');
     let skills = document.querySelector('#lang-section').querySelectorAll('.cv-field-skill');
-    for (let i = 0; i < socialPlatforms.length; i++){
-        if (langs[i].value && skills[i].value){
-            res_user.langs.push({lang: langs[i].value, skill: skills[i].value});
+    for (let i = 0; i < languages.length; i++){
+        if (languages[i].value && skills[i].value){
+            res_user.langs.push({lang: languages[i].value, skill: skills[i].value});
         }
     }
 
@@ -158,6 +158,7 @@ function generate() {
             social: res_user.social,
             country: res_user.country,
             age: res_user.age,
+            driver: res_user.driver,
 
             position: res_user.position,
             city: res_user.city,
@@ -166,6 +167,7 @@ function generate() {
             job_cat: res_user.job_cat,
             langs: res_user.langs,
 
+            has_dl: res_user.has_dl,
             bio: res_user.bio,
             visa: res_user.visa,
             green_cart: res_user.gcart,
