@@ -16,7 +16,7 @@ function getWidth(url, fixedH = 0){
     });
 }
 
-function getBase64ImageFromURL(url, ) {
+function getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
         let img = new Image();
         img.setAttribute("crossOrigin", "anonymous");
@@ -53,6 +53,12 @@ async function createPdf(){
         langsUl.push(langs[i].lang + '(' + langs[i].skill + ')');
     }
 
+    let social = res_user.social;
+    let socialUl = [];
+    for (let i = 0; i < social.length; i++){
+        socialUl.push(social[i].platform + ': ' + social[i].link );
+    }
+
     let city = res_user.city;
     let salary = res_user.salary;
 
@@ -61,16 +67,15 @@ async function createPdf(){
     let imgPath = './unknown.jpg';
     let imgHei = 200;
 
-    if (usrPhoto){
-        imgPath = URL.createObjectURL(usrPhoto);
-    }
+    if (usrPhoto){ imgPath = URL.createObjectURL(usrPhoto);}
+
     let dd = {
         // header: {
         //     image: await this.getBase64ImageFromURL('./Template/header.png'),
         // },
         content: [
             {
-                image: await this.getBase64ImageFromURL(imgPath, imgHei),
+                image: await this.getBase64ImageFromURL(imgPath),
                 width: await this.getWidth(imgPath, imgHei),
                 height: imgHei,
             },
@@ -79,11 +84,22 @@ async function createPdf(){
                 style: [ 'header', 'mainStyle' ]
             },
             {
-                text:'\nСтрана проживания: ' +res_user.country +
+                text:'\nСтрана проживания: ' + res_user.country +
                     '\nТелефон: ' + res_user.phone +
-                    '\nВозраст: ' + res_user.age +
                     '\nEmail: ' + res_user.email +
-                    '\nСоциальные сети:',
+                    '\nВозраст: ' + res_user.age,
+                style: [ 'mainStyle' ],
+            },
+            {
+                text: (res_user.has_dl ? 'Водительские права: ' + res_user.driver : ''),
+                style: [ 'mainStyle' ],
+            },
+            {
+                text: (socialUl == '' ? '' : 'Социальные сети:'),
+                style: [ 'mainStyle' ],
+            },
+            {
+                ul: socialUl,
                 style: [ 'mainStyle' ],
             },
             {
@@ -91,11 +107,7 @@ async function createPdf(){
                 style: 'subheader'
             },
             {
-                text: '' + (city == '' ? '' : 'Желаемый город работы:'),
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: city,
+                text: (city == '' ? '' : 'Желаемый город работы: ' + city),
                 style: [ 'mainStyle' ],
             },
             {
@@ -173,7 +185,7 @@ async function createPdf(){
                 bold: true
             },
             mainStyle:{
-                lineHeight: 1.2,
+                lineHeight: 1.4,
                 markerColor: '#5E9734',
             },
             mainStyle:{
