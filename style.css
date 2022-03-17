@@ -10,7 +10,12 @@
     display: flex;
     justify-content: space-between;
 }
-
+.cv-section-block-right{
+    margin-left: 5px;
+}
+.cv-section-block-left{
+    margin-right: 5px;
+}
 .cv-section{
     padding: 20px 30px;
     border-radius: 10px;
