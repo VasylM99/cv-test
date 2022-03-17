@@ -107,12 +107,10 @@ if(positionButtons){
 }
 let jobBlock = document.querySelector('.job-block');
 if(jobBlock){
-    let remove = jobBlock.querySelector('.remove');
     let add = jobBlock.querySelector('.add');
-    let addBlock = jobBlock.querySelector('.add-item-block');
-    let addItem = jobBlock.querySelector('.add-item');
+    let addBlock = jobBlock.querySelector('.add-item-block .position-block');
+    let addItem = jobBlock.querySelector('.add-item .position-block-add');
     add.addEventListener('click', function () {
-        console.log(addBlock.children.length)
         if(addBlock.children.length < 5){
             let jobBlockClone = addItem.cloneNode(true);
             addBlock.appendChild(jobBlockClone);
@@ -175,7 +173,7 @@ if(city){
     if(e.target.checked){
         e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = '#50A718';
         checkedCity.push(e.target.value);
-        e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCity.join(); 
+        e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCity.join('; '); 
     }else{
         e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = 'transparent';
         let index = checkedCity.indexOf(e.target.value);
