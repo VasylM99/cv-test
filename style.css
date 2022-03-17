@@ -242,9 +242,6 @@ input::-webkit-inner-spin-button {
 .dop-section{
     justify-content: space-between;
 }
-.cv-form-item-dop{
-    width: 583px;
-}
 .cv-form-item-emp{
     width: 215px;
     align-items: flex-end;
@@ -256,6 +253,9 @@ input::-webkit-inner-spin-button {
 .cv-form-item-emp p{
     text-align: right;
     width: 100%;
+}
+.cv-form-item-dop{
+    width: 70%;
 }
 .dop-title{
     max-width: max-content;
@@ -270,7 +270,9 @@ input::-webkit-inner-spin-button {
 .cv-form-items-dop{
     display: flex;
     width: 100%;
-    justify-content: space-between;
+}
+.dop-item:not(:last-child){
+    margin-right: 20px;
 }
 .cv-btn-sub, .cv-btn-gnr{
     font-size: 19px;
@@ -295,6 +297,7 @@ input::-webkit-inner-spin-button {
 .input-checkbox-label{
     background: #F8F9FE;
     border: 1px solid #E9E9E9;
+    box-sizing: border-box;
     border-radius: 5px;
     display: flex!important;
     align-items: center;
@@ -345,15 +348,8 @@ input::-webkit-inner-spin-button {
     justify-content: flex-start;
 }
 
-@media(max-width: 520px){
-    .cv-form-block{
-        flex-direction: column;
-    }
-    .cv-form-item{
-        width: 100%;
-    }
-}
-@media(max-width: 1140px){
+
+@media(max-width: 960px){
     .cv-section-block{
         flex-direction: column;
         align-items: center;
@@ -365,8 +361,63 @@ input::-webkit-inner-spin-button {
         margin-bottom: 40px;
     }
 }
-
-
+@media(max-width: 845px){
+    .dop-section .cv-form-block{
+        flex-direction: column;
+    }
+    .cv-form-item-dop{
+        width: 100%;
+    }
+    .cv-form-item-emp{
+        align-items: center;
+    }
+}
+@media(max-width: 615px){
+    .cv-form-item-column {
+        align-items: center;
+    }
+    .cv-form-items-dop{
+        flex-direction: column;
+        align-items: center;
+    }
+    .cv-form-item-emp{
+        width: 100%;
+    }
+    .dop-item{
+        width: 170px;
+    }
+    .dop-item:not(:last-child){
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+@media(max-width: 480px){
+    .cv-section{
+        padding: 20px 15px;
+    }
+    .cv-form-block-doc .cv-form-item{
+        width: 100%;
+    }
+    .input-checkbox-label{
+        width: 100%;
+    }
+    .cv-section-header p{
+        margin: auto;
+    }
+    .cv-form-block{
+        flex-direction: column;
+        align-items: center;
+    }
+    .cv-form-item{
+        width: 100%;
+    }
+    .dop-item{
+        width: 100%;
+    }
+    .social-media-block, .lang-block, .choose-cat{
+        margin-bottom: 15px!important;
+    }
+}
 .cv-form-item{
     position: relative;
 }
