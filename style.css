@@ -326,6 +326,9 @@ input::-webkit-inner-spin-button {
 	transition: .5s;
     padding: 10px;
 }
+.cv-btns-gnr .dropdown-item{
+    text-align: center;
+}
 .dropdown-item-multiple{
     padding: 0;
 }
