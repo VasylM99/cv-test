@@ -529,8 +529,8 @@ input::-webkit-inner-spin-button {
 .remove{
     padding: 0 10px;
     margin-left: 10px;
-    min-height: 32px;
     max-height: 32px;
+    min-height: 32px;
 }
 .add{
     padding: 5px 45px;
@@ -545,7 +545,8 @@ input::-webkit-inner-spin-button {
     border: 1px solid #E9E9E9;
     border-radius: 5px;
     background: #F8F9FE;
-    cursor: pointer;;
+    cursor: pointer;
+    box-sizing: border-box;
 }
 .add svg, .remove svg{
     pointer-events: none;
