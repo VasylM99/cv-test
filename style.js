@@ -87,24 +87,6 @@ if(languageBlock){
     })
 }
 
-let positionBlock = document.querySelector('.position-block');
-let positionButtons = document.querySelector('.position-block-btns');
-if(positionButtons){
-    let positionBtns = document.querySelector('.position-block-btns');
-    positionBtns.addEventListener('click', function (e) {
-        if (e.target.classList.contains('position-block-add-btn')) {
-            if(positionBlock.children.length <= 5){
-                let positionBlockClone = positionBlock.querySelector('.cv-form-field').cloneNode(true);
-                positionBlock.appendChild(positionBlockClone);
-            }
-        }
-        if (e.target.classList.contains('position-block-remove-btn')){
-            if(positionBlock.children.length > 2){
-                positionBlock.removeChild(positionBlock.lastChild);
-            }
-        }
-    })
-}
 let jobBlock = document.querySelector('.job-block');
 if(jobBlock){
     let add = jobBlock.querySelector('.add');
