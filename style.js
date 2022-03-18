@@ -108,18 +108,6 @@ if(jobBlock){
     })
 }
 
-
-let cvFormDoc = document.querySelector('.cv-form-block-doc');
-if(cvFormDoc){
-    cvFormDoc.addEventListener('change', function(e){
-        if(e.target.checked){
-            e.target.closest('.cv-form-item').querySelector('.input-checkbox-label div').style.background = '#50A718';
-        }else{
-            e.target.closest('.cv-form-item').querySelector('.input-checkbox-label div').style.background = 'transparent';
-        }
-    })
-}
-
 let cvFormDop = document.querySelector('.cv-form-items-dop');
 if(cvFormDop){
     cvFormDop.addEventListener('change', function(e){

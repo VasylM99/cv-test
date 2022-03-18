@@ -168,6 +168,9 @@ input::-webkit-inner-spin-button {
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.cv-form-block-doc input:checked + label div{
+    background-color: #50A718;
+}
 .cv-form-block-doc .cv-form-item{
     width: auto;
 }
