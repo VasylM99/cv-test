@@ -144,7 +144,7 @@ if (form) {
             event.target.closest('.dropdown').classList.add('hide');
         }
         bodyBlock.addEventListener('click', function (event) {
-            if(!event.target.closest('.cv-form-item')){
+            if(!event.target.closest('.cv-form-item') && !event.target.closest('.cv-btns-gnr')){
                 if(!document.querySelector('.dropdown-multiple').classList.contains('hide')){
                     document.querySelector('.dropdown-multiple').classList.add('hide');
                 }
