@@ -1,3 +1,4 @@
+let bodyBlock = document.querySelector('body');
 let negotiatedSalary = document.querySelector('#res_negotiated-salary');
 if (negotiatedSalary) {
     let desiredSalary = document.querySelector('#res_salary');
@@ -58,7 +59,6 @@ if(socialMediaBlock){
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
                 e.target.parentNode.remove();
-
             }
         }
     })
@@ -66,7 +66,6 @@ if(socialMediaBlock){
 
 let languageBlock = document.querySelector('.lang-section');
 if(languageBlock){
-    let remove = languageBlock.querySelector('.remove');
     let add = languageBlock.querySelector('.add');
     let addBlock = languageBlock.querySelector('.add-item-block');
     let addItem = languageBlock.querySelector('.add-item');
@@ -90,15 +89,25 @@ if(languageBlock){
     })
 }
 
+
+function onlyOne(checkbox) {
+    let checkboxes = document.getElementsByName('document');
+    checkboxes.forEach((item) => {
+        if (item !== checkbox) item.checked = false;
+    })
+}
+
+
 let jobBlock = document.querySelector('.job-block');
 if(jobBlock){
     let add = jobBlock.querySelector('.add');
-    let addBlock = jobBlock.querySelector('.add-item-block .position-block');
-    let addItem = jobBlock.querySelector('.add-item .position-block-add');
+    let addBlock = jobBlock.querySelector('.add-item-block');
+    let addItem = jobBlock.querySelector('.add-item');
     add.addEventListener('click', function () {
         if(addBlock.children.length < 5){
             let jobBlockClone = addItem.cloneNode(true);
             jobBlockClone.querySelector('.cv-field-position').value = '';
+            jobBlockClone.querySelector('#res_job_cat').value = '';
             addBlock.appendChild(jobBlockClone);
         }
     })
@@ -134,6 +143,20 @@ if (form) {
             event.target.closest('.dropdown').parentNode.querySelector('.dropdown-header').value = event.target.textContent;
             event.target.closest('.dropdown').classList.add('hide');
         }
+        bodyBlock.addEventListener('click', function (event) {
+            if(!event.target.closest('.cv-form-item')){
+                if(!document.querySelector('.dropdown-multiple').classList.contains('hide')){
+                    document.querySelector('.dropdown-multiple').classList.add('hide');
+                }
+                let dropdownEl = document.querySelectorAll('.dropdown');
+                for (let i = 0; i < dropdownEl.length; i++) {
+                    if(!dropdownEl[i].classList.contains('hide')){
+                        dropdownEl[i].classList.add('hide');
+                    }
+                    
+                }
+            }
+        })
     })
 }
 

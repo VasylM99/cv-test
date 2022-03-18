@@ -196,18 +196,6 @@ input::-webkit-inner-spin-button {
 .social-media-link-block{
     width: 40.5%;
 }
-.position-block{
-    flex-direction: column;
-}
-.position-block-add{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    position: relative;
-}
-.position-block-add:not(:last-child){
-    margin-bottom: 15px;
-}
 .dop-section{
     justify-content: space-between;
 }
@@ -275,6 +263,9 @@ input::-webkit-inner-spin-button {
 .input-checkbox-hidden{
     display: none;
     opacity: 0;
+}
+.dropdown-header{
+    cursor: pointer;
 }
 .input-checkbox-label{
     background: #F8F9FE;
