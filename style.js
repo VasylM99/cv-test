@@ -42,7 +42,6 @@ if(inputBlock){
 
 let socialMediaBlock = document.querySelector('.social-section');
 if(socialMediaBlock){
-    let remove = socialMediaBlock.querySelectorAll('.remove');
     let add = socialMediaBlock.querySelector('.add');
     let addBlock = socialMediaBlock.querySelector('.add-item-block');
     let addItem = socialMediaBlock.querySelector('.add-item');
@@ -50,6 +49,8 @@ if(socialMediaBlock){
         console.log(addBlock.children.length)
         if(addBlock.children.length < 5){
             let socialMediaBlockClone = addItem.cloneNode(true);
+            socialMediaBlockClone.querySelector('.res_sc_plat').value = '';
+            socialMediaBlockClone.querySelector('.res_sc_link').value = '';
             addBlock.appendChild(socialMediaBlockClone);
         }
     })
@@ -74,6 +75,8 @@ if(languageBlock){
         console.log(numLanguage)
         if(addBlock.children.length <= numLanguage){
             let languageBlockClone = addItem.cloneNode(true);
+            languageBlockClone.querySelector('.cv-field-lang').value = '';
+            languageBlockClone.querySelector('.cv-field-skill').value = '';
             addBlock.appendChild(languageBlockClone);
         }
     })
@@ -95,6 +98,7 @@ if(jobBlock){
     add.addEventListener('click', function () {
         if(addBlock.children.length < 5){
             let jobBlockClone = addItem.cloneNode(true);
+            jobBlockClone.querySelector('.cv-field-position').value = '';
             addBlock.appendChild(jobBlockClone);
         }
     })
