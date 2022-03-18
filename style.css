@@ -107,12 +107,14 @@
 .cv-form-svg-open{
     position: absolute;
     right: 8px;
+    pointer-events: none;
 }
 .cv-form-svg{
     position: absolute;
     left: 8px;
     display: flex;
     align-items: center;
+    pointer-events: none;
 }
 .cv-form-item-emp .cv-form-svg, .cv-form-item-emp .cv-form-svg-open{
     bottom: 8px;
