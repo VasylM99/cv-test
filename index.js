@@ -50,7 +50,7 @@ async function createPdf(){
     let langs = res_user.langs;
     let langsUl = [];
     for (let i = 0; i < langs.length; i++){
-        langsUl.push(langs[i].lang + '(' + langs[i].skill + ')');
+        langsUl.push(langs[i].lang + ' ' + langs[i].skill );
     }
 
     let social = res_user.social;

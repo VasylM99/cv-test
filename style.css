@@ -424,6 +424,7 @@ input::-webkit-inner-spin-button {
     }
     .cv-section-header p{
         margin: auto;
+	    text-align: center;
     }
     .cv-form-block{
         flex-direction: column;
