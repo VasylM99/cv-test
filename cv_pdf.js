@@ -123,17 +123,18 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (res_user.hasDoc ? '\nДокументы': ''),
-                style: ['subheader', 'mainStyle' ],
+                text: (res_user.hasDoc ? '\nДокументы: ': '') + (res_user.bio ? 'Биометрия': '') +
+                    (res_user.visa ? 'Рабочая виза': '') + (res_user.gcart ? 'Green card': ''),
+                style: [/*'subheader',*/ 'mainStyle' ],
             },
-            {
-                ul :[
-                    (res_user.bio ? 'Биометрия': ''),
-                    (res_user.visa ? 'Рабочая виза': ''),
-                    (res_user.gcart ? 'Green card': ''),
-                ],
-                style: [ 'mainStyle' ],
-            },
+            // {
+            //     ul :[
+            //         (res_user.bio ? 'Биометрия': ''),
+            //         (res_user.visa ? 'Рабочая виза': ''),
+            //         (res_user.gcart ? 'Green card': ''),
+            //     ],
+            //     style: [ 'mainStyle' ],
+            // },
             {
                 text: '\nНаправление работы',
                 style: ['subheader', 'mainStyle' ],

@@ -7758,7 +7758,7 @@ function decorateNode(node) {
 /* harmony default export */ var src_LayoutBuilder = (LayoutBuilder);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
 var es_string_split = __webpack_require__(3123);
-// EXTERNAL MODULE: ./node_modules/xmldoc/index.js
+// EXTERNAL MODULE: ./node_modules/xmldoc/cv_pdf.js
 var xmldoc = __webpack_require__(6513);
 var xmldoc_default = /*#__PURE__*/__webpack_require__.n(xmldoc);
 ;// CONCATENATED MODULE: ./src/SVGMeasure.js
@@ -9310,7 +9310,7 @@ var virtual_fs_cjs_default = /*#__PURE__*/__webpack_require__.n(virtual_fs_cjs);
 // EXTERNAL MODULE: ./node_modules/core-js/configurator.js
 var configurator = __webpack_require__(7800);
 var configurator_default = /*#__PURE__*/__webpack_require__.n(configurator);
-;// CONCATENATED MODULE: ./src/browser-extensions/index.js
+;// CONCATENATED MODULE: ./src/browser-extensions/cv_pdf.js
 function browser_extensions_inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; browser_extensions_setPrototypeOf(subClass, superClass); }
 
 function browser_extensions_setPrototypeOf(o, p) { browser_extensions_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return browser_extensions_setPrototypeOf(o, p); }
@@ -36018,7 +36018,7 @@ var GZIP_HEADER_ID1 = 0x1f;
 var GZIP_HEADER_ID2 = 0x8b;
 
 /**
- * Emulate Node's zlib C++ layer for use by the JS layer in index.js
+ * Emulate Node's zlib C++ layer for use by the JS layer in cv_pdf.js
  */
 function Zlib(mode) {
   if (typeof mode !== 'number' || mode < exports.DEFLATE || mode > exports.UNZIP) {
@@ -57507,7 +57507,7 @@ var bomHandling = __webpack_require__(5395),
     iconv = module.exports;
 
 // All codecs and aliases are kept here, keyed by encoding name/alias.
-// They are lazy loaded in `iconv.getCodec` from `encodings/index.js`.
+// They are lazy loaded in `iconv.getCodec` from `encodings/cv_pdf.js`.
 iconv.encodings = null;
 
 // Characters emitted in case of error.
