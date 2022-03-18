@@ -1,5 +1,6 @@
 <?php
 print_r($_GET);
+
 /*
 $name = $_GET['name'];
 $surname = $_GET['surname'];
