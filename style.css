@@ -485,6 +485,12 @@ input::-webkit-inner-spin-button {
         margin-bottom: 20px;
     }
 }
+@media(max-width: 520px){
+    .job-header p{
+        width: auto;
+        word-break: break-word;
+    }
+}
 @media(max-width: 480px){
     .cv-section{
         padding: 20px 15px;
