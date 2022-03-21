@@ -46,6 +46,7 @@ if(socialMediaBlock){
     let add = socialMediaBlock.querySelector('.add');
     let addBlock = socialMediaBlock.querySelector('.add-item-block');
     let addItem = socialMediaBlock.querySelector('.add-item');
+    
     add.addEventListener('click', function () {
         console.log(addBlock.children.length)
         if(addBlock.children.length < 5){
@@ -58,7 +59,7 @@ if(socialMediaBlock){
     addBlock.addEventListener('click', function (e) {
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
-                e.target.parentNode.remove();
+                e.target.closest('.add-item').remove();
             }
         }
     })
@@ -82,7 +83,7 @@ if(languageBlock){
     addBlock.addEventListener('click', function (e) {
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
-                e.target.parentNode.remove();
+                e.target.closest('.add-item').remove();
 
             }
         }
@@ -114,7 +115,7 @@ if(jobBlock){
     addBlock.addEventListener('click', function (e) {
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
-                e.target.parentNode.remove();
+                e.target.closest('.add-item').remove();
 
             }
         }
