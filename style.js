@@ -46,7 +46,17 @@ if(socialMediaBlock){
     let add = socialMediaBlock.querySelector('.add');
     let addBlock = socialMediaBlock.querySelector('.add-item-block');
     let addItem = socialMediaBlock.querySelector('.add-item');
-    
+    let scPlat = socialMediaBlock.querySelector('.res_sc_plat');
+    let scLink = socialMediaBlock.querySelector('.res_sc_link');
+   function required() {
+    if(scPlat.value){
+        console.log(scPlat);
+        scLink.required = true;
+    }
+   }
+    // scPlat.addEventListener('change', function(){
+
+    // })
     add.addEventListener('click', function () {
         console.log(addBlock.children.length)
         if(addBlock.children.length < 5){
