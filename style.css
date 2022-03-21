@@ -550,4 +550,9 @@ input::-webkit-inner-spin-button {
     .cv-btns-gnr{
         margin-top: 10px;
     }
+    .cv-btns-gnr{
+        margin-left: 0;
+        max-width: 138.48px;
+        width: 100%;
+    }
 }
