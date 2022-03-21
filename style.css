@@ -239,6 +239,7 @@ input::-webkit-inner-spin-button {
 .cv-btns{
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 .cv-btn-sub, .cv-btns-gnr{
     font-size: 16px;
@@ -451,6 +452,11 @@ input::-webkit-inner-spin-button {
 
 
 @media(max-width: 1000px){
+    .cv-form-container{
+        box-shadow: 0px 1.5px 7px rgba(0, 0, 0, 0.04);
+        border: 0.8px solid #E5E5E5;
+        border-radius: 3px;
+    }
     .cv-section-block{
         flex-direction: column;
         align-items: center;
@@ -458,9 +464,12 @@ input::-webkit-inner-spin-button {
     .cv-section{
         max-width: 100%;
         width: calc(100% - 60px);
+        box-shadow: none;
+        border: none;
+        padding: 0 30px;
     }
-    .cv-section:not(:last-child){
-        margin-bottom: 10px;
+    .cv-section-block{
+        margin-bottom: 0;
     }
     .cv-section-block-left{
         margin-right: 0;
@@ -520,7 +529,7 @@ input::-webkit-inner-spin-button {
         width: calc(100% - 30px);
     }
     .cv-section{
-        padding: 20px 15px;
+        padding: 0px 15px;
     }
     .cv-form-block-doc .cv-form-item{
         width: 100%;
