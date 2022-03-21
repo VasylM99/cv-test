@@ -17,7 +17,7 @@ function getResUser(){
         city: [],
         salary: "",
         fixedSalary: false,
-        job_cat: "",
+        job: [],
         langs: [],
         has_dl: false,
         hasDoc: false,
@@ -38,11 +38,10 @@ function getResUser(){
     res_user.email = document.querySelector('#res_email').value;
     res_user.country = document.querySelector('#res_country').value;
     res_user.age = document.querySelector('#res_age').value;
-    res_user.city = document.querySelector('#res_city').value;
+    res_user.city = document.querySelector('#res_city').value.split('; ');
     res_user.salary = document.querySelector('#res_salary').value;
     res_user.desc = document.querySelector('#res_desc').value;
     res_user.emp_type = document.querySelector('#res_employment_type').value;
-    res_user.job_cat = document.querySelector('#res_job_cat').value;
     res_user.driver = document.querySelector('#res_dl').value;
 
     res_user.has_dl = (document.querySelector('#res_has_dl:checked')) ? true : false;
@@ -76,6 +75,14 @@ function getResUser(){
     for (let i = 0; i < languages.length; i++){
         if (languages[i].value && skills[i].value){
             res_user.langs.push({lang: languages[i].value, skill: skills[i].value});
+        }
+    }
+
+    let j_cat = document.querySelector('#job-section').querySelectorAll('.cv-field-job');
+    let position = document.querySelector('#job-section').querySelectorAll('.cv-field-position');
+    for (let i = 0; i < j_cat.length; i++){
+        if (j_cat[i].value && position[i].value){
+            res_user.job.push({cat: j_cat[i].value, position: position[i].value});
         }
     }
 
@@ -149,6 +156,9 @@ function generate() {
             .attachModule(imageModule)
             .compile({ paragraphLoop: true });
 
+        let hasDesc =  (res_user.desc == '' ? false : true);
+        console.log(hasDesc);
+
         doc.resolveData({
             image: imgPath,
             first_name: res_user.f_name,
@@ -160,11 +170,10 @@ function generate() {
             age: res_user.age,
             driver: res_user.driver,
 
-            position: res_user.position,
             city: res_user.city,
             salary: res_user.salary,
             fixedSalary: res_user.fixedSalary,
-            job_cat: res_user.job_cat,
+            job: res_user.job,
             langs: res_user.langs,
 
             has_dl: res_user.has_dl,
