@@ -26,7 +26,7 @@
     border: 0.8px solid #E5E5E5;
 }
 .cv-section-fw{
-    width: 100%;
+    max-width: 100%;
 }
 .cv-section-block{
     margin-bottom: 10px;
