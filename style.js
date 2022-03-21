@@ -143,6 +143,28 @@ if(cvFormDop){
     })
 }
 
+let expBlock = document.querySelector('.exp-block');
+if(expBlock){
+    let add = expBlock.querySelector('.add');
+    let addBlock = expBlock.querySelector('.cv-form-items-exp');
+    let addItem = expBlock.querySelector('.add-item');
+    add.addEventListener('click', function () {
+        if(addBlock.children.length < 5){
+            let expBlockClone = addItem.cloneNode(true);
+            expBlockClone.querySelector('#res_work_place').value = '';
+            expBlockClone.querySelector('#res_profession').value = '';
+            expBlockClone.querySelector('#res_years_work').value = '';
+            addBlock.appendChild(expBlockClone);
+        }
+    })
+    addBlock.addEventListener('click', function (e) {
+        if(addBlock.children.length > 1){
+            if(e.target.classList.contains('remove')){
+                e.target.closest('.add-item').remove();
+            }
+        }
+    })
+}
 
 let form = document.querySelector('.cv-form');
 if (form) {
