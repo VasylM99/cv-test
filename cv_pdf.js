@@ -50,7 +50,13 @@ async function createPdf(){
     let langs = res_user.langs;
     let langsUl = [];
     for (let i = 0; i < langs.length; i++){
-        langsUl.push(langs[i].lang + ' ' + langs[i].skill );
+        langsUl.push(langs[i].lang + ': ' + langs[i].skill );
+    }
+
+    let job = res_user.job;
+    let jobUl = [];
+    for (let i = 0; i < job.length; i++) {
+        jobUl.push(job[i].cat + ': ' + job[i].position);
     }
 
     let social = res_user.social;
@@ -107,7 +113,11 @@ async function createPdf(){
                 style: 'subheader'
             },
             {
-                text: (city == '' ? '' : 'Желаемый город работы: ' + city),
+                text: (city == '' ? '' : 'Желаемый город работы: '),
+                style: [ 'mainStyle' ],
+            },
+            {
+                ul: city,
                 style: [ 'mainStyle' ],
             },
             {
@@ -123,30 +133,16 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (res_user.hasDoc ? '\nДокументы: ': '') + (res_user.bio ? 'Биометрия': '') +
+                text: (res_user.hasDoc ? 'Документы: ': '') + (res_user.bio ? 'Биометрия': '') +
                     (res_user.visa ? 'Рабочая виза': '') + (res_user.gcart ? 'Green card': ''),
-                style: [/*'subheader',*/ 'mainStyle' ],
+                style: ['mainStyle' ],
             },
-            // {
-            //     ul :[
-            //         (res_user.bio ? 'Биометрия': ''),
-            //         (res_user.visa ? 'Рабочая виза': ''),
-            //         (res_user.gcart ? 'Green card': ''),
-            //     ],
-            //     style: [ 'mainStyle' ],
-            // },
             {
                 text: '\nНаправление работы',
                 style: ['subheader', 'mainStyle' ],
             },
             {
-                text: 'Категория: ' + res_user.job_cat +
-                    '\nЖелаемая должность: ',
-                style: [ 'mainStyle' ],
-            },
-            {
-                ul : res_user.position,
-
+                ul : jobUl,
                 style: [ 'mainStyle' ],
             },
             {
@@ -188,10 +184,6 @@ async function createPdf(){
             mainStyle:{
                 lineHeight: 1.4,
                 markerColor: '#5E9734',
-            },
-            mainStyle:{
-              lineHeight: 1.2,
-              markerColor: '#5E9734',
             },
             quote: {
                 italics: true
