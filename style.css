@@ -205,8 +205,12 @@ input::-webkit-inner-spin-button {
     justify-content: space-between;
 }
 .cv-form-item-emp{
-    width: 215px;
-    align-items: flex-end;
+    display: flex;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.add-emp{
+    display: flex;
 }
 .cv-form-item-dop p{
     text-align: left;
@@ -454,12 +458,12 @@ input::-webkit-inner-spin-button {
     background: #F8F9FE;
     cursor: pointer;
     box-sizing: border-box;
+    max-height: 32px;
+    min-height: 32px;
 }
 .remove{
     padding: 0 10px;
     margin-left: 10px;
-    max-height: 32px;
-    min-height: 32px;
 }
 .hide-remove{
     display: none;
