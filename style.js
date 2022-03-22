@@ -53,13 +53,33 @@ if(socialMediaBlock){
             socialMediaBlockClone.querySelector('.res_sc_link').value = '';
             addBlock.appendChild(socialMediaBlockClone);
         }
+        if(addBlock.children.length > 1){
+            let remove =  socialMediaBlock.querySelectorAll('.remove');
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
     addBlock.addEventListener('click', function (e) {
+        let remove =  socialMediaBlock.querySelectorAll('.remove');
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
                 e.target.closest('.add-item').remove();
             }
         }
+        if(addBlock.children.length > 1){
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
 }
 
@@ -76,14 +96,44 @@ if(languageBlock){
             languageBlockClone.querySelector('.cv-field-skill').value = '';
             addBlock.appendChild(languageBlockClone);
         }
+        if(addBlock.children.length > 1){
+            let remove =  languageBlock.querySelectorAll('.remove');
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
     addBlock.addEventListener('click', function (e) {
+        let remove =  languageBlock.querySelectorAll('.remove');
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
                 e.target.closest('.add-item').remove();
 
             }
+            if(addBlock.children.length > 1){
+                for (let i = 0; i < remove.length; i++) {
+                    remove[i].classList.remove('hide-remove')  
+                }
+             }else{
+                 for (let i = 0; i < remove.length; i++) {
+                     remove[i].classList.add('hide-remove')  
+                 }
+             }
         }
+        if(addBlock.children.length > 1){
+            let remove =  languageBlock.querySelectorAll('.remove');
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
 }
 
@@ -107,15 +157,35 @@ if(jobBlock){
             jobBlockClone.querySelector('.cv-field-position').value = '';
             jobBlockClone.querySelector('#res_job_cat').value = '';
             addBlock.appendChild(jobBlockClone);
+        } 
+        if(addBlock.children.length > 1){
+            let remove =  addBlock.querySelectorAll('.remove');
+           for (let i = 0; i < remove.length; i++) {
+               remove[i].classList.remove('hide-remove')  
+           }
+        }else{
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.add('hide-remove')  
+            }
         }
     })
     addBlock.addEventListener('click', function (e) {
+        let remove =  addBlock.querySelectorAll('.remove');
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
                 e.target.closest('.add-item').remove();
 
             }
         }
+        if(addBlock.children.length > 1){
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
 }
 
@@ -174,13 +244,33 @@ if(eduBlock){
             eduBlockClone.querySelector('#res_speciality').classList.add('disabled-input');
             addBlock.appendChild(eduBlockClone);
         }
+        if(addBlock.children.length > 1){
+            let remove =  eduBlock.querySelectorAll('.remove');
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
     addBlock.addEventListener('click', function (e) {
+        let remove =  eduBlock.querySelectorAll('.remove');
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
                 e.target.closest('.add-item').remove();
             }
         }
+        if(addBlock.children.length > 1){
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
 }
 
@@ -232,13 +322,33 @@ if(expBlock){
             expBlockClone.querySelector('#res_years_work').classList.add('disabled-input');
             addBlock.appendChild(expBlockClone);
         }
+        if(addBlock.children.length > 1){
+            let remove =  expBlock.querySelectorAll('.remove');
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
     addBlock.addEventListener('click', function (e) {
+        let remove =  expBlock.querySelectorAll('.remove');
         if(addBlock.children.length > 1){
             if(e.target.classList.contains('remove')){
                 e.target.closest('.add-item').remove();
             }
         }
+        if(addBlock.children.length > 1){
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].classList.remove('hide-remove')  
+            }
+         }else{
+             for (let i = 0; i < remove.length; i++) {
+                 remove[i].classList.add('hide-remove')  
+             }
+         }
     })
 }
 

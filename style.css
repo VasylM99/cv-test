@@ -438,12 +438,7 @@ input::-webkit-inner-spin-button {
 .add-item:not(:last-child){
     margin-bottom: 15px;
 }
-.remove{
-    padding: 0 10px;
-    margin-left: 10px;
-    max-height: 32px;
-    min-height: 32px;
-}
+
 .add{
     padding: 5px 45px;
     margin-top: 15px;
@@ -459,6 +454,15 @@ input::-webkit-inner-spin-button {
     background: #F8F9FE;
     cursor: pointer;
     box-sizing: border-box;
+}
+.remove{
+    padding: 0 10px;
+    margin-left: 10px;
+    max-height: 32px;
+    min-height: 32px;
+}
+.hide-remove{
+    display: none;
 }
 .add svg, .remove svg{
     pointer-events: none;
