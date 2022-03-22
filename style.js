@@ -135,6 +135,18 @@ if(eduBlock){
     let add = eduBlock.querySelector('.add');
     let addBlock = eduBlock.querySelector('.cv-form-items-edu');
     let addItem = eduBlock.querySelector('.add-item');
+    let dopEdu = document.querySelector('#dop-edc');
+    dopEdu.addEventListener('change', function () {
+        if(dopEdu.checked){
+            eduBlock.querySelector('.edu-institution').disabled = true;
+            eduBlock.querySelector('.edu-institution').classList.add('disabled-input');
+            eduBlock.querySelector('#res_speciality').disabled = true;
+        }else{
+            eduBlock.querySelector('.edu-institution').disabled = false;
+            eduBlock.querySelector('.edu-institution').classList.remove('disabled-input');
+            eduBlock.querySelector('#res_speciality').disabled = false;
+        }
+    })
     addBlock.addEventListener('change', function (e) {
         if(e.target.classList.contains('edu-institution')){
             if(e.target.value){
@@ -156,11 +168,8 @@ if(eduBlock){
             let eduBlockClone = addItem.cloneNode(true);
             eduBlockClone.querySelector('#res_edu_institution').value = '';
             eduBlockClone.querySelector('#res_speciality').value = '';
-            eduBlockClone.querySelector('#res_edu_level').value = '';
             eduBlockClone.querySelector('#res_speciality').disabled = true;
-            eduBlockClone.querySelector('#res_edu_level').disabled = true;
             eduBlockClone.querySelector('#res_speciality').classList.add('disabled-input');
-            eduBlockClone.querySelector('#res_edu_level').classList.add('disabled-input');
             addBlock.appendChild(eduBlockClone);
         }
     })
@@ -178,6 +187,20 @@ if(expBlock){
     let add = expBlock.querySelector('.add');
     let addBlock = expBlock.querySelector('.cv-form-items-exp');
     let addItem = expBlock.querySelector('.add-item');
+    let dopExp = document.querySelector('#dop-exp');
+    dopExp.addEventListener('change', function () {
+        if(dopExp.checked){
+            expBlock.querySelector('.work-place').disabled = true;
+            expBlock.querySelector('.work-place').classList.add('disabled-input');
+            expBlock.querySelector('#res_profession').disabled = true;
+            expBlock.querySelector('#res_years_work').disabled = true;
+        }else{
+            expBlock.querySelector('.work-place').disabled = false;
+            expBlock.querySelector('.work-place').classList.remove('disabled-input');
+            expBlock.querySelector('#res_profession').disabled = false;
+            expBlock.querySelector('#res_years_work').disabled = false;
+        }
+    })
     addBlock.addEventListener('change', function (e) {
         if(e.target.classList.contains('work-place')){
             if(e.target.value){
@@ -192,7 +215,6 @@ if(expBlock){
                 e.target.closest('.add-item').children[2].querySelector('input').disabled = true;
             }
         }
-        
     })
     add.addEventListener('click', function () {
         if(addBlock.children.length < 5){
