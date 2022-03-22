@@ -203,34 +203,33 @@ if(cvFormDop){
 let eduBlock = document.querySelector('.edu-block');
 if(eduBlock){
     let add = eduBlock.querySelector('.add');
-    let addBlock = eduBlock.querySelector('.cv-form-items-edu');
+    let addContainer = eduBlock.querySelector('.cv-form-items-edu');
+    let addBlock = eduBlock.querySelector('.cv-form-items-edu .cv-form-items-dop');
     let addItem = eduBlock.querySelector('.add-item');
     let dopEdu = document.querySelector('#dop-edc');
     dopEdu.addEventListener('change', function () {
         if(dopEdu.checked){
+            dopEdu.closest('.dop-edc').querySelector('.input-checkbox-label div').style.background = '#50A718';
             eduBlock.querySelector('.edu-institution').disabled = true;
             eduBlock.querySelector('.edu-institution').classList.add('disabled-input');
             eduBlock.querySelector('#res_speciality').disabled = true;
-            eduBlock.style.display = 'none';
+            addContainer.style.display = 'none';
         }else{
+            dopEdu.closest('.dop-edc').querySelector('.input-checkbox-label div').style.background = 'transparent';
             eduBlock.querySelector('.edu-institution').disabled = false;
             eduBlock.querySelector('.edu-institution').classList.remove('disabled-input');
             eduBlock.querySelector('#res_speciality').disabled = false;
-            eduBlock.style.display = 'block';
+            addContainer.style.display = 'block';
         }
     })
     addBlock.addEventListener('change', function (e) {
         if(e.target.classList.contains('edu-institution')){
             if(e.target.value){
                 e.target.closest('.add-item').children[1].querySelector('input').classList.remove('disabled-input');
-                e.target.closest('.add-item').children[2].querySelector('input').classList.remove('disabled-input');
                 e.target.closest('.add-item').children[1].querySelector('input').disabled = false;
-                e.target.closest('.add-item').children[2].querySelector('input').disabled = false;
             }else{
                 e.target.closest('.add-item').children[1].querySelector('input').classList.add('disabled-input');
-                e.target.closest('.add-item').children[2].querySelector('input').classList.add('disabled-input');
                 e.target.closest('.add-item').children[1].querySelector('input').disabled = true;
-                e.target.closest('.add-item').children[2].querySelector('input').disabled = true;
             }
         }
         
@@ -277,22 +276,25 @@ if(eduBlock){
 let expBlock = document.querySelector('.exp-block');
 if(expBlock){
     let add = expBlock.querySelector('.add');
-    let addBlock = expBlock.querySelector('.cv-form-items-exp');
+    let addContainer = expBlock.querySelector('.cv-form-items-exp');
+    let addBlock = expBlock.querySelector('.cv-form-items-exp .cv-form-items-dop');
     let addItem = expBlock.querySelector('.add-item');
     let dopExp = document.querySelector('#dop-exp');
     dopExp.addEventListener('change', function () {
         if(dopExp.checked){
+            dopExp.closest('.dop-exp').querySelector('.input-checkbox-label div').style.background = '#50A718';
             expBlock.querySelector('.work-place').disabled = true;
             expBlock.querySelector('.work-place').classList.add('disabled-input');
             expBlock.querySelector('#res_profession').disabled = true;
             expBlock.querySelector('#res_years_work').disabled = true;
-            expBlock.style.display = 'none';
+            addContainer.style.display = 'none';
         }else{
+            dopExp.closest('.dop-exp').querySelector('.input-checkbox-label div').style.background = 'transparent';
             expBlock.querySelector('.work-place').disabled = false;
             expBlock.querySelector('.work-place').classList.remove('disabled-input');
             expBlock.querySelector('#res_profession').disabled = false;
             expBlock.querySelector('#res_years_work').disabled = false;
-            expBlock.style.display = 'block';
+            addContainer.style.display = 'block';
         }
     })
     addBlock.addEventListener('change', function (e) {
