@@ -61,7 +61,7 @@
 }
 .cv-form-item{
     width: 47%;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     position: relative;
     display: flex;
     align-items: center;
@@ -446,7 +446,7 @@ input::-webkit-inner-spin-button {
 .add{
     padding: 5px 45px;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .add, .remove{
     display: flex;
