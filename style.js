@@ -141,10 +141,12 @@ if(eduBlock){
             eduBlock.querySelector('.edu-institution').disabled = true;
             eduBlock.querySelector('.edu-institution').classList.add('disabled-input');
             eduBlock.querySelector('#res_speciality').disabled = true;
+            eduBlock.style.display = 'none';
         }else{
             eduBlock.querySelector('.edu-institution').disabled = false;
             eduBlock.querySelector('.edu-institution').classList.remove('disabled-input');
             eduBlock.querySelector('#res_speciality').disabled = false;
+            eduBlock.style.display = 'block';
         }
     })
     addBlock.addEventListener('change', function (e) {
@@ -194,11 +196,13 @@ if(expBlock){
             expBlock.querySelector('.work-place').classList.add('disabled-input');
             expBlock.querySelector('#res_profession').disabled = true;
             expBlock.querySelector('#res_years_work').disabled = true;
+            expBlock.style.display = 'none';
         }else{
             expBlock.querySelector('.work-place').disabled = false;
             expBlock.querySelector('.work-place').classList.remove('disabled-input');
             expBlock.querySelector('#res_profession').disabled = false;
             expBlock.querySelector('#res_years_work').disabled = false;
+            expBlock.style.display = 'block';
         }
     })
     addBlock.addEventListener('change', function (e) {
