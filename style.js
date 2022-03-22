@@ -46,19 +46,7 @@ if(socialMediaBlock){
     let add = socialMediaBlock.querySelector('.add');
     let addBlock = socialMediaBlock.querySelector('.add-item-block');
     let addItem = socialMediaBlock.querySelector('.add-item');
-    let scPlat = socialMediaBlock.querySelector('.res_sc_plat');
-    let scLink = socialMediaBlock.querySelector('.res_sc_link');
-   function required() {
-    if(scPlat.value){
-        console.log(scPlat);
-        scLink.required = true;
-    }
-   }
-    // scPlat.addEventListener('change', function(){
-
-    // })
     add.addEventListener('click', function () {
-        console.log(addBlock.children.length)
         if(addBlock.children.length < 5){
             let socialMediaBlockClone = addItem.cloneNode(true);
             socialMediaBlockClone.querySelector('.res_sc_plat').value = '';
@@ -82,7 +70,6 @@ if(languageBlock){
     let addItem = languageBlock.querySelector('.add-item');
     let numLanguage = addBlock.querySelector('.dropdown').querySelectorAll('.dropdown-item').length -1;
     add.addEventListener('click', function () {
-        console.log(numLanguage)
         if(addBlock.children.length <= numLanguage){
             let languageBlockClone = addItem.cloneNode(true);
             languageBlockClone.querySelector('.cv-field-lang').value = '';
@@ -143,17 +130,80 @@ if(cvFormDop){
     })
 }
 
+let eduBlock = document.querySelector('.edu-block');
+if(eduBlock){
+    let add = eduBlock.querySelector('.add');
+    let addBlock = eduBlock.querySelector('.cv-form-items-edu');
+    let addItem = eduBlock.querySelector('.add-item');
+    addBlock.addEventListener('change', function (e) {
+        if(e.target.classList.contains('edu-institution')){
+            if(e.target.value){
+                e.target.closest('.add-item').children[1].querySelector('input').classList.remove('disabled-input');
+                e.target.closest('.add-item').children[2].querySelector('input').classList.remove('disabled-input');
+                e.target.closest('.add-item').children[1].querySelector('input').disabled = false;
+                e.target.closest('.add-item').children[2].querySelector('input').disabled = false;
+            }else{
+                e.target.closest('.add-item').children[1].querySelector('input').classList.add('disabled-input');
+                e.target.closest('.add-item').children[2].querySelector('input').classList.add('disabled-input');
+                e.target.closest('.add-item').children[1].querySelector('input').disabled = true;
+                e.target.closest('.add-item').children[2].querySelector('input').disabled = true;
+            }
+        }
+        
+    })
+    add.addEventListener('click', function () {
+        if(addBlock.children.length < 5){
+            let eduBlockClone = addItem.cloneNode(true);
+            eduBlockClone.querySelector('#res_edu_institution').value = '';
+            eduBlockClone.querySelector('#res_speciality').value = '';
+            eduBlockClone.querySelector('#res_edu_level').value = '';
+            eduBlockClone.querySelector('#res_speciality').disabled = true;
+            eduBlockClone.querySelector('#res_edu_level').disabled = true;
+            eduBlockClone.querySelector('#res_speciality').classList.add('disabled-input');
+            eduBlockClone.querySelector('#res_edu_level').classList.add('disabled-input');
+            addBlock.appendChild(eduBlockClone);
+        }
+    })
+    addBlock.addEventListener('click', function (e) {
+        if(addBlock.children.length > 1){
+            if(e.target.classList.contains('remove')){
+                e.target.closest('.add-item').remove();
+            }
+        }
+    })
+}
+
 let expBlock = document.querySelector('.exp-block');
 if(expBlock){
     let add = expBlock.querySelector('.add');
     let addBlock = expBlock.querySelector('.cv-form-items-exp');
     let addItem = expBlock.querySelector('.add-item');
+    addBlock.addEventListener('change', function (e) {
+        if(e.target.classList.contains('work-place')){
+            if(e.target.value){
+                e.target.closest('.add-item').children[1].querySelector('input').classList.remove('disabled-input');
+                e.target.closest('.add-item').children[2].querySelector('input').classList.remove('disabled-input');
+                e.target.closest('.add-item').children[1].querySelector('input').disabled = false;
+                e.target.closest('.add-item').children[2].querySelector('input').disabled = false;
+            }else{
+                e.target.closest('.add-item').children[1].querySelector('input').classList.add('disabled-input');
+                e.target.closest('.add-item').children[2].querySelector('input').classList.add('disabled-input');
+                e.target.closest('.add-item').children[1].querySelector('input').disabled = true;
+                e.target.closest('.add-item').children[2].querySelector('input').disabled = true;
+            }
+        }
+        
+    })
     add.addEventListener('click', function () {
         if(addBlock.children.length < 5){
             let expBlockClone = addItem.cloneNode(true);
             expBlockClone.querySelector('#res_work_place').value = '';
             expBlockClone.querySelector('#res_profession').value = '';
             expBlockClone.querySelector('#res_years_work').value = '';
+            expBlockClone.querySelector('#res_profession').disabled = true;
+            expBlockClone.querySelector('#res_years_work').disabled = true;
+            expBlockClone.querySelector('#res_profession').classList.add('disabled-input');
+            expBlockClone.querySelector('#res_years_work').classList.add('disabled-input');
             addBlock.appendChild(expBlockClone);
         }
     })
