@@ -378,7 +378,6 @@ if (form) {
                 }
             }
         })
-        console.log(event.target)
     })
 }
 

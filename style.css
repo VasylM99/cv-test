@@ -256,7 +256,7 @@ input::-webkit-inner-spin-button {
 .cv-btns{
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 .cv-btn-sub, .cv-btns-gnr{
     font-size: 16px;
