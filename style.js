@@ -189,18 +189,6 @@ if(jobBlock){
          }
     })
 }
-
-let cvFormDop = document.querySelector('.cv-form-items-dop');
-if(cvFormDop){
-    cvFormDop.addEventListener('change', function(e){
-        if(e.target.checked){
-            e.target.closest('.dop-item').querySelector('.input-checkbox-label div').style.background = '#50A718';
-        }else{
-            e.target.closest('.dop-item').querySelector('.input-checkbox-label div').style.background = 'transparent';
-        }
-    })
-}
-
 let eduBlock = document.querySelector('.edu-block');
 if(eduBlock){
     let add = eduBlock.querySelector('.add');
