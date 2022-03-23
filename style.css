@@ -45,13 +45,10 @@
     padding: 7px 10px;
     border-bottom: 1.5px solid rgba(192, 199, 206, 0.25);
 }
-.cv-section-header-dop-info{
+.cv-section-header-center{
     display: flex;
     justify-content: center;
-}
-.cv-section-control{
-    display: flex;
-    justify-content: space-between;
+    margin-bottom: 20px;
 }
 .cv-form-block{
     display: flex;
@@ -101,7 +98,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    color: #8492A4;
+    color: #3D4857;
 }
 .cv-form-item input[type=text]::placeholder, .cv-form-item input[type=number]::placeholder, .cv-form-item input[type=email]::placeholder, .cv-form-item input[type=date]::placeholder {
     color: #8492A4;
@@ -111,6 +108,10 @@
     position: absolute;
     right: 8px;
     pointer-events: none;
+    transition: .5s;
+}
+.rotate{
+    transform: rotate(180deg);
 }
 .cv-form-svg{
     position: absolute;
@@ -277,9 +278,8 @@ input::-webkit-inner-spin-button {
     margin-left: 10px;
     position: relative;
     max-width: max-content;
-}
-.cv-btns-gnr .cv-form-svg-open{
-    top: 8px;
+    display: flex;
+    align-items: center;
 }
 .cv-btn-gnr{
     padding: 5px 20px;
@@ -297,6 +297,9 @@ input::-webkit-inner-spin-button {
 }
 .dropdown-header{
     cursor: pointer;
+}
+.dropdown-header:hover .cv-form-svg-open{
+    background-color: red;
 }
 .input-checkbox-label{
     background: #F8F9FE;

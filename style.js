@@ -146,6 +146,7 @@ function onlyOne(checkbox) {
 }
 
 
+
 let jobBlock = document.querySelector('.job-block');
 if(jobBlock){
     let add = jobBlock.querySelector('.add');
@@ -359,10 +360,12 @@ if (form) {
     form.addEventListener('click', function (event) {
         if(event.target.closest('.dropdown-header')){
             event.target.parentNode.querySelector('.dropdown').classList.toggle('hide');
+            event.target.parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
         }
         if(event.target.classList.contains('dropdown-item')){
             event.target.closest('.dropdown').parentNode.querySelector('.dropdown-header').value = event.target.textContent;
             event.target.closest('.dropdown').classList.add('hide');
+            event.target.closest('.dropdown').parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
         }
         bodyBlock.addEventListener('click', function (event) {
             if(!event.target.closest('.cv-form-item') && !event.target.closest('.cv-btns-gnr')){
@@ -373,6 +376,13 @@ if (form) {
                 for (let i = 0; i < dropdownEl.length; i++) {
                     if(!dropdownEl[i].classList.contains('hide')){
                         dropdownEl[i].classList.add('hide');
+                    }
+                    
+                }
+                let rotateArrow = document.querySelectorAll('.cv-form-svg-open')
+                for (let i = 0; i < rotateArrow.length; i++) {
+                    if(rotateArrow[i].classList.contains('rotate')){
+                        rotateArrow[i].classList.remove('rotate');
                     }
                     
                 }
@@ -406,6 +416,7 @@ if(city){
             
         }
         city.querySelector('.dropdown-multiple').classList.add('hide');
+        city.querySelector('.cv-form-svg-open').classList.remove('rotate');
     }else{
         for (let i = 0; i < itemMultiple.length; i++) {
             if(!itemMultiple[i].querySelector('.input-checkbox-hidden').checked){
@@ -418,6 +429,7 @@ if(city){
 city.addEventListener('click', function (event) {
     if(event.target.closest('.dropdown-header-multiple')){
         event.target.parentNode.querySelector('.dropdown-multiple').classList.toggle('hide');
+        event.target.parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
     } 
 })
 }
