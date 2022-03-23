@@ -102,11 +102,11 @@
     line-height: 20px;
     color: #3D4857;
 }
-input:focus::placeholder{
-    color: transparent;
-}
-input.dropdown-header::placeholder {
+.cv-form-item input[type=text]::placeholder, .cv-form-item input[type=number]::placeholder, .cv-form-item input[type=email]::placeholder, .cv-form-item input[type=date]::placeholder {
     color: #8492A4;
+}
+input.input-focus:focus input.input-focus::placeholder{
+    color: transparent!important;
 }
 /* ---------SVG Icons----------- */
 .cv-form-svg-open{
@@ -345,6 +345,7 @@ input::-webkit-inner-spin-button {
     height: 15px;
     background-color: #8492A4;
     margin: 0 8px;
+    border-radius: 1.5px;
 }
 .dropdown, .dropdown-multiple{
     max-height: 150px;
@@ -499,6 +500,9 @@ input::-webkit-inner-spin-button {
         box-shadow: 0px 1.5px 7px rgba(0, 0, 0, 0.04);
         border: 0.8px solid #E5E5E5;
         border-radius: 3px;
+    }
+    .cv-section-header-center:first-child{
+        margin-top: 30px;
     }
     .cv-section-block{
         flex-direction: column;
