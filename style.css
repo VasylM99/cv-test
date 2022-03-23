@@ -102,7 +102,10 @@
     line-height: 20px;
     color: #3D4857;
 }
-.cv-form-item input[type=text]::placeholder, .cv-form-item input[type=number]::placeholder, .cv-form-item input[type=email]::placeholder, .cv-form-item input[type=date]::placeholder {
+input:focus::placeholder{
+    color: transparent;
+}
+input.dropdown-header::placeholder {
     color: #8492A4;
 }
 /* ---------SVG Icons----------- */
