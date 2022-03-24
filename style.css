@@ -102,11 +102,8 @@
     line-height: 20px;
     color: #3D4857;
 }
-.cv-form-item input[type=text]::placeholder, .cv-form-item input[type=number]::placeholder, .cv-form-item input[type=email]::placeholder, .cv-form-item input[type=date]::placeholder {
+.cv-form-item input::placeholder{
     color: #8492A4;
-}
-input.input-focus:focus input.input-focus::placeholder{
-    color: transparent!important;
 }
 /* ---------SVG Icons----------- */
 .cv-form-svg-open{
@@ -308,12 +305,9 @@ input::-webkit-inner-spin-button {
     display: none;
     opacity: 0;
 }
-.dropdown-header{
+.dropdown-header, .dropdown-header-multiple{
     cursor: pointer;
     padding-right: 30px;
-}
-.dropdown-header:hover .cv-form-svg-open{
-    background-color: red;
 }
 .input-checkbox-label{
     background: #F8F9FE;
