@@ -1,3 +1,12 @@
+function funcReadOnly(el) {
+    el.addEventListener('keydown', function (e) {
+        if(e.keyCode === 8 || e.keyCode === 46){
+            e.preventDefault();
+        }
+        e.preventDefault();
+    })
+}
+
 let bodyBlock = document.querySelector('body');
 let negotiatedSalary = document.querySelector('#res_negotiated-salary');
 if (negotiatedSalary) {
@@ -353,7 +362,6 @@ if (form) {
             event.target.closest('.dropdown').parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
         }
         bodyBlock.addEventListener('click', function (event) {
-            console.log(event.target)
             if(!event.target.closest('.dropdown-block')){
                 let dropdown = document.querySelectorAll('.dropdown');
                 for (let i = 0; i < dropdown.length; i++) {
