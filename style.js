@@ -451,6 +451,7 @@ function inputSc(inputLink) {
     let input = inputLink.closest('.cv-form-block').querySelector('.res_sc_plat');
     if(input.value){
         inputLink.readOnly = false;
+        inputLink.required = true;
         inputLink.classList.remove('disabled-input');
     }
 }
@@ -459,5 +460,6 @@ function inputLang(languageSkill) {
     if(language.value){
         languageSkill.classList.add('dropdown-header');
         languageSkill.classList.remove('disabled-input');
+        languageSkill.required = true;
     }
 }
