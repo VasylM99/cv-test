@@ -19,13 +19,14 @@ function getResUser(){
         fixedSalary: false,
         job: [],
         langs: [],
+        education: [],
+        experience: [],
         has_dl: false,
         hasDoc: false,
         bio: false,
         visa: false,
         gcart: false,
         hasAdt: false,
-        no_lang: false,
         no_edc: false,
         no_exp: false,
         emp_type: "",
@@ -50,7 +51,6 @@ function getResUser(){
     res_user.visa = (document.querySelector('#document-visa:checked')) ? true : false;
     res_user.gcart = (document.querySelector('#document-card:checked')) ? true : false;
     if(res_user.bio || res_user.visa || res_user.gcart){res_user.hasDoc = true};
-    res_user.no_lang = (document.querySelector('#dop-lang:checked')) ? true : false;
     res_user.no_exp = (document.querySelector('#dop-exp:checked')) ? true : false;
     res_user.no_edc = (document.querySelector('#dop-edc:checked')) ? true : false;
     if(res_user.no_lang || res_user.no_exp || res_user.no_edc){res_user.hasAdt = true};
@@ -78,6 +78,7 @@ function getResUser(){
         }
     }
 
+
     let j_cat = document.querySelector('#job-section').querySelectorAll('.cv-field-job');
     let position = document.querySelector('#job-section').querySelectorAll('.cv-field-position');
     for (let i = 0; i < j_cat.length; i++){
@@ -86,8 +87,25 @@ function getResUser(){
         }
     }
 
-    console.log(res_user);
+    let eduInst = document.querySelector('#cv-form-items-edu').querySelectorAll('.edu-institution');
+    let eduSpec = document.querySelector('#cv-form-items-edu').querySelectorAll('.edu-speciality');
+    for (let i = 0; i < eduInst.length; i++){
+        if (eduInst[i].value && eduSpec[i].value && !res_user.no_edc){
+            res_user.education.push({inst: eduInst[i].value, spec: eduSpec[i].value});
+        }
+    }
+    console.log(res_user.education);
+    let expPlace = document.querySelector('#cv-form-items-exp').querySelectorAll('.work-place');
+    let expProf = document.querySelector('#cv-form-items-exp').querySelectorAll('.work-prof');
+    let expStand = document.querySelector('#cv-form-items-exp').querySelectorAll('.work-years');
+    for (let i = 0; i < expPlace.length; i++){
+        if (expPlace[i].value && expProf[i].value && expStand[i] && !res_user.no_exp ){
+            res_user.experience.push({place: expPlace[i].value, prof: expProf[i].value, stand: expStand[i].value});
+        }
+    }
 
+
+    console.log(res_user.experience);
     return res_user;
 }
 
@@ -181,7 +199,6 @@ function generate() {
             visa: res_user.visa,
             green_cart: res_user.gcart,
             hasDoc: res_user.hasDoc,
-            no_lang: res_user.no_lang,
             no_edc: res_user.no_edc,
             no_exp: res_user.no_exp,
             hasAdt: res_user.hasAdt,
