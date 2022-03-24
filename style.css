@@ -115,6 +115,7 @@ input.input-focus:focus::placeholder, textarea.input-focus:focus::placeholder{
     right: 8px;
     pointer-events: none;
     transition: .5s;
+    height: 16px;
 }
 .rotate{
     transform: rotate(180deg);
