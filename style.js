@@ -352,27 +352,15 @@ if (form) {
             event.target.closest('.dropdown').classList.add('hide');
             event.target.closest('.dropdown').parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
         }
-
         bodyBlock.addEventListener('click', function (event) {
-            let dropdown = document.querySelectorAll('.dropdown');
-            let dropdownEl = [];
-            for (let i = 0; i < dropdown.length; i++) {
-                if(!dropdown[i].classList.contains('hide')){
-                    dropdownEl.push(dropdown[i]);
-                } 
-            }
-            if(!event.target.closest('.cv-form-item') && !event.target.closest('.cv-btns-gnr')){
-                for (let i = 0; i < dropdownEl.length; i++) {
-                    if(!dropdownEl[i].classList.contains('hide')){
-                        dropdownEl[i].classList.add('hide');
-                    }
-                }
-                let rotateArrow = document.querySelectorAll('.cv-form-svg-open')
-                for (let i = 0; i < rotateArrow.length; i++) {
-                    if(rotateArrow[i].classList.contains('rotate')){
-                        rotateArrow[i].classList.remove('rotate');
-                    }
-                    
+            console.log(event.target)
+            if(!event.target.closest('.dropdown-block')){
+                let dropdown = document.querySelectorAll('.dropdown');
+                for (let i = 0; i < dropdown.length; i++) {
+                    if(!dropdown[i].classList.contains('hide')){
+                        dropdown[i].classList.add('hide');
+                        dropdown[i].parentNode.querySelector('.cv-form-svg-open').classList.remove('rotate');
+                    } 
                 }
             }
         })
