@@ -105,6 +105,9 @@
 .cv-form-item input::placeholder{
     color: #8492A4;
 }
+input.input-focus:focus::placeholder, textarea.input-focus:focus::placeholder{
+    color: transparent;
+}
 /* ---------SVG Icons----------- */
 .cv-form-svg-open{
     position: absolute;
