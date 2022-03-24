@@ -1,11 +1,3 @@
-function funcReadOnly(el) {
-    el.addEventListener('keydown', function (e) {
-        if(e.keyCode === 8 || e.keyCode === 46){
-            e.preventDefault();
-        }
-        e.preventDefault();
-    })
-}
 let bodyBlock = document.querySelector('body');
 let negotiatedSalary = document.querySelector('#res_negotiated-salary');
 if (negotiatedSalary) {
