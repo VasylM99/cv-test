@@ -104,6 +104,7 @@
 }
 .cv-form-item input::placeholder{
     color: #8492A4;
+    transition: .5s;
 }
 input.input-focus:focus::placeholder, textarea.input-focus:focus::placeholder{
     color: transparent;
