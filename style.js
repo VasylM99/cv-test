@@ -6,7 +6,6 @@ function funcReadOnly(el) {
         e.preventDefault();
     })
 }
-
 let bodyBlock = document.querySelector('body');
 let negotiatedSalary = document.querySelector('#res_negotiated-salary');
 if (negotiatedSalary) {
@@ -349,7 +348,7 @@ if(expBlock){
 }
 
 let form = document.querySelector('.cv-form');
-if (form) {
+if (form){
     form.addEventListener('click', function (event) {
         if(event.target.closest('.dropdown-header')){
             event.target.parentNode.querySelector('.dropdown').classList.toggle('hide');
@@ -380,40 +379,40 @@ if(city){
     let itemMultiple = city.querySelectorAll('.dropdown-item-multiple');
     let checkedCity = [];
     cityDropdown.addEventListener('change', function(e){
-    if(e.target.checked){
-        e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = '#50A718';
-        checkedCity.push(e.target.value);
-        e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCity.join('; '); 
-    }else{
-        e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = 'transparent';
-        let index = checkedCity.indexOf(e.target.value);
-        checkedCity.splice(index, 1);
-        e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCity.join('; ');
-    }
-    if(checkedCity.length >= 5){
-        for (let i = 0; i < itemMultiple.length; i++) {
-            if(!itemMultiple[i].querySelector('.input-checkbox-hidden').checked){
-                itemMultiple[i].classList.add('disabled-input');
-            }
-            
+        if(e.target.checked){
+            e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = '#50A718';
+            checkedCity.push(e.target.value);
+            e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCity.join('; '); 
+        }else{
+            e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = 'transparent';
+            let index = checkedCity.indexOf(e.target.value);
+            checkedCity.splice(index, 1);
+            e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCity.join('; ');
         }
-        city.querySelector('.dropdown-multiple').classList.add('hide');
-        city.querySelector('.cv-form-svg-open').classList.remove('rotate');
-    }else{
-        for (let i = 0; i < itemMultiple.length; i++) {
-            if(!itemMultiple[i].querySelector('.input-checkbox-hidden').checked){
-                itemMultiple[i].classList.remove('disabled-input');
+        if(checkedCity.length >= 5){
+            for (let i = 0; i < itemMultiple.length; i++) {
+                if(!itemMultiple[i].querySelector('.input-checkbox-hidden').checked){
+                    itemMultiple[i].classList.add('disabled-input');
+                }
+                
             }
-            
+            city.querySelector('.dropdown-multiple').classList.add('hide');
+            city.querySelector('.cv-form-svg-open').classList.remove('rotate');
+        }else{
+            for (let i = 0; i < itemMultiple.length; i++) {
+                if(!itemMultiple[i].querySelector('.input-checkbox-hidden').checked){
+                    itemMultiple[i].classList.remove('disabled-input');
+                }
+                
+            }
         }
-    }
-})
-city.addEventListener('click', function (event) {
-    if(event.target.closest('.dropdown-header-multiple')){
-        event.target.parentNode.querySelector('.dropdown-multiple').classList.toggle('hide');
-        event.target.parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
-    } 
-})
+    })
+    city.addEventListener('click', function (event) {
+        if(event.target.closest('.dropdown-header-multiple')){
+            event.target.parentNode.querySelector('.dropdown-multiple').classList.toggle('hide');
+            event.target.parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
+        } 
+    })
 }
 let catBlock = document.querySelector('.choose-cat');
 if(catBlock){
@@ -421,43 +420,41 @@ if(catBlock){
     let catItemMultiple = catBlock.querySelectorAll('.dropdown-item-multiple');
     let checkedCat = [];
     catDropdown.addEventListener('change', function(e){
-    if(e.target.checked){
-        e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = '#50A718';
-        checkedCat.push(e.target.value);
-        e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCat.join('; '); 
-    }else{
-        e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = 'transparent';
-        let index = checkedCat.indexOf(e.target.value);
-        checkedCat.splice(index, 1);
-        e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCat.join('; ');
-    }
-    if(checkedCat.length >= 5){
-        for (let i = 0; i < catItemMultiple.length; i++) {
-            if(!catItemMultiple[i].querySelector('.input-checkbox-hidden').checked){
-                catItemMultiple[i].classList.add('disabled-input');
-            }
-            
+        if(e.target.checked){
+            e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = '#50A718';
+            checkedCat.push(e.target.value);
+            e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCat.join('; '); 
+        }else{
+            e.target.closest('.input-checkbox-label-dropdown').querySelector('div').style.background = 'transparent';
+            let index = checkedCat.indexOf(e.target.value);
+            checkedCat.splice(index, 1);
+            e.target.closest('.dropdown-multiple').parentElement.querySelector('.dropdown-header-multiple').value = checkedCat.join('; ');
         }
-        catBlock.querySelector('.dropdown-multiple').classList.add('hide');
-        catBlock.querySelector('.cv-form-svg-open').classList.remove('rotate');
-    }else{
-        for (let i = 0; i < catItemMultiple.length; i++) {
-            if(!catItemMultiple[i].querySelector('.input-checkbox-hidden').checked){
-                catItemMultiple[i].classList.remove('disabled-input');
+        if(checkedCat.length >= 5){
+            for (let i = 0; i < catItemMultiple.length; i++) {
+                if(!catItemMultiple[i].querySelector('.input-checkbox-hidden').checked){
+                    catItemMultiple[i].classList.add('disabled-input');
+                }
+                
             }
-            
+            catBlock.querySelector('.dropdown-multiple').classList.add('hide');
+            catBlock.querySelector('.cv-form-svg-open').classList.remove('rotate');
+        }else{
+            for (let i = 0; i < catItemMultiple.length; i++) {
+                if(!catItemMultiple[i].querySelector('.input-checkbox-hidden').checked){
+                    catItemMultiple[i].classList.remove('disabled-input');
+                }
+                
+            }
         }
-    }
-})
-catBlock.addEventListener('click', function (event) {
-    if(event.target.closest('.dropdown-header-multiple')){
-        event.target.parentNode.querySelector('.dropdown-multiple').classList.toggle('hide');
-        event.target.parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
-    } 
-})
+    })
+    catBlock.addEventListener('click', function (event) {
+        if(event.target.closest('.dropdown-header-multiple')){
+            event.target.parentNode.querySelector('.dropdown-multiple').classList.toggle('hide');
+            event.target.parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
+        } 
+    })
 }
-
-
 function inputSc(inputLink) {
     let input = inputLink.closest('.cv-form-block').querySelector('.res_sc_plat');
     if(input.value){
