@@ -354,16 +354,18 @@ if (form) {
         }
 
         bodyBlock.addEventListener('click', function (event) {
+            let dropdown = document.querySelectorAll('.dropdown');
+            let dropdownEl = [];
+            for (let i = 0; i < dropdown.length; i++) {
+                if(!dropdown[i].classList.contains('hide')){
+                    dropdownEl.push(dropdown[i]);
+                } 
+            }
             if(!event.target.closest('.cv-form-item') && !event.target.closest('.cv-btns-gnr')){
-                if(!document.querySelector('.dropdown-multiple').classList.contains('hide')){
-                    document.querySelector('.dropdown-multiple').classList.add('hide');
-                }
-                let dropdownEl = document.querySelectorAll('.dropdown');
                 for (let i = 0; i < dropdownEl.length; i++) {
                     if(!dropdownEl[i].classList.contains('hide')){
                         dropdownEl[i].classList.add('hide');
                     }
-                    
                 }
                 let rotateArrow = document.querySelectorAll('.cv-form-svg-open')
                 for (let i = 0; i < rotateArrow.length; i++) {
