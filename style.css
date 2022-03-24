@@ -208,9 +208,6 @@ input::-webkit-inner-spin-button {
     align-items: center;
     width: 100%;
 }
-.dop-section{
-    justify-content: space-between;
-}
 .cv-form-item-emp{
     display: flex;
     margin-top: 15px;
@@ -533,9 +530,6 @@ input::-webkit-inner-spin-button {
     }
 }
 @media(max-width: 875px){
-    .dop-section .cv-form-block{
-        flex-direction: column;
-    }
     .cv-form-item-dop{
         width: 100%;
     }
