@@ -94,7 +94,7 @@ function getResUser(){
             res_user.education.push({inst: eduInst[i].value, spec: eduSpec[i].value});
         }
     }
-    console.log(res_user.education);
+
     let expPlace = document.querySelector('#cv-form-items-exp').querySelectorAll('.work-place');
     let expProf = document.querySelector('#cv-form-items-exp').querySelectorAll('.work-prof');
     let expStand = document.querySelector('#cv-form-items-exp').querySelectorAll('.work-years');
@@ -104,8 +104,6 @@ function getResUser(){
         }
     }
 
-
-    console.log(res_user.experience);
     return res_user;
 }
 
@@ -123,7 +121,7 @@ function generate() {
     loadFile("Template/template.docx",function(error,content){
         if (error) { throw error };
 
-        var opts = {}
+        let opts = {}
         opts.centered = false;
         opts.getImage = function (tagValue, tagName) {
             return new Promise(function (resolve, reject) {
@@ -141,11 +139,8 @@ function generate() {
             // FOR FIXED SIZE IMAGE :
             // return [741, 486];
 
-            // FOR IMAGE COMING FROM A URL (IF TAGVALUE IS AN ADRESS) :
-            // To use this feature, you have to be using docxtemplater async
-            // (if you are calling setData(), you are not using async).
             return new Promise(function (resolve, reject) {
-                var image = new Image();
+                let image = new Image();
                 image.src = imgPath;
                 image.onload = function () {
 
@@ -166,10 +161,10 @@ function generate() {
             });
         }
 
-        var imageModule = new ImageModule(opts);
+        let imageModule = new ImageModule(opts);
 
-        var zip = new JSZip(content);
-        var doc=new window.docxtemplater()
+        let zip = new JSZip(content);
+        let doc=new window.docxtemplater()
             .loadZip(zip)
             .attachModule(imageModule)
             .compile({ paragraphLoop: true });
@@ -193,6 +188,8 @@ function generate() {
             fixedSalary: res_user.fixedSalary,
             job: res_user.job,
             langs: res_user.langs,
+            education: res_user.education,
+            experience: res_user.experience,
 
             has_dl: res_user.has_dl,
             bio: res_user.bio,
@@ -207,7 +204,7 @@ function generate() {
         }).then(function () {
             console.log('ready');
             doc.render();
-            var out = doc.getZip().generate({
+            let out = doc.getZip().generate({
                 type: "blob",
                 mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             });

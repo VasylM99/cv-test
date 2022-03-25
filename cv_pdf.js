@@ -53,6 +53,18 @@ async function createPdf(){
         langsUl.push(langs[i].lang + ': ' + langs[i].skill );
     }
 
+    let edu = res_user.education;
+    let eduUl = [];
+    for (let i = 0; i < edu.length; i++) {
+        eduUl.push(edu[i].inst + ': ' + edu[i].spec);
+    }
+
+    let exp = res_user.education;
+    let expUl = [];
+    for (let i = 0; i < exp.length; i++) {
+        expUl.push(exp[i].place + ': ' + exp[i].prof + ' ' + exp[i].stand);
+    }
+
     let job = res_user.job;
     let jobUl = [];
     for (let i = 0; i < job.length; i++) {
@@ -93,7 +105,7 @@ async function createPdf(){
                 text:'\nСтрана проживания: ' + res_user.country +
                     '\nТелефон: ' + res_user.phone +
                     '\nEmail: ' + res_user.email +
-                    '\nВозраст: ' + res_user.age,
+                    '\nГод рождения: ' + res_user.age,
                 style: [ 'mainStyle' ],
             },
             {
@@ -143,6 +155,22 @@ async function createPdf(){
             },
             {
                 ul : jobUl,
+                style: [ 'mainStyle' ],
+            },
+            {
+                text: '\nОпыт работы',
+                style: ['subheader', 'mainStyle' ],
+            },
+            {
+                ul : expUl,
+                style: [ 'mainStyle' ],
+            },
+            {
+                text: '\nОбразование',
+                style: ['subheader', 'mainStyle' ],
+            },
+            {
+                ul : eduUl,
                 style: [ 'mainStyle' ],
             },
             {
