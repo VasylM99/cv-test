@@ -243,6 +243,11 @@ input::-webkit-inner-spin-button {
 .cv-form-items-edu .add, .cv-form-items-exp .add{
     margin-bottom: 0;
 }
+
+input[type="text"].short-description{
+    padding-left: 10px;
+}
+
 .cv-btns{
     display: flex;
     justify-content: center;
