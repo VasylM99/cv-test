@@ -156,11 +156,11 @@ input::-webkit-inner-spin-button {
     width: 100%;
     resize: none;
     height: 100px;
-    background: #F5F5F5;
+    background: #F8F9FE;
     border: 0.7px solid #C0C7CE;
     box-sizing: border-box;
     border-radius: 5px;
-    color: #8492A4;
+    color: #3D4857;
     font-size: 14px;
 }
 .cv-form-item textarea::placeholder {
