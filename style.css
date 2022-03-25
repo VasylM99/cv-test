@@ -386,6 +386,7 @@ input::-webkit-inner-spin-button {
 .cdl-label, .neg-label{
     width: 100%;
     justify-content: flex-start;
+    height: 32px;
 }
 
 .form-item-checkbox{
@@ -393,13 +394,34 @@ input::-webkit-inner-spin-button {
 }
 
 .form-item-salary{
-    width: 65%
+    width: 70%
+}
+.form-item-salary input{
+    padding-right: 97px;
+}
+.type-salary-block{
+    position: absolute;
+    right: 0;
+    width: 97px;
 }
 .type-salary{
-    width: 30%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.type-salary input[type="text"]{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    padding-right: 25px;
+    text-align: right;
+    outline: none;
+}
+#res_salary::-webkit-input-placeholder::before{
+    content:"Line 1\A Line 2\A Line 3\A"!important;
 }
 .form-item-neg-salary{
-    width: 33%;
+    width: 28%;
     justify-content: flex-start;
 }
 

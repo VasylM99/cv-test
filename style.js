@@ -4,6 +4,23 @@ if (negotiatedSalary) {
     let desiredSalary = document.querySelector('#res_salary');
     let period = document.querySelector('#res_period');
     let negotiatedSalaryLabel = document.querySelector('.neg-label');
+    desiredSalary.oninput = function () {
+        if(this.value.length > 7){
+            this.value = this.value.slice(0, 7);
+        }
+    }
+    window.addEventListener('resize', ()=>{
+        if(document.body.offsetWidth < 400){
+            desiredSalary.placeholder = 'Желаемая ЗП';
+        }else{
+            desiredSalary.placeholder = 'Желаемая заработная плата';
+        }
+    })
+    if(document.body.offsetWidth < 400){
+        desiredSalary.placeholder = 'Желаемая ЗП';
+    }else{
+        desiredSalary.placeholder = 'Желаемая заработная плата';
+    }
     negotiatedSalary.addEventListener('change', function () {
         if(negotiatedSalary.checked){
             desiredSalary.style.opacity = '0.4';
