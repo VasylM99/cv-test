@@ -195,14 +195,6 @@ input::-webkit-inner-spin-button {
     width: 100%;
     text-align: center;
 }
-.language-block-in{
-    display: flex;
-    justify-content: space-between;
-    transition: .5s;
-}
-.language-block-in:not(:last-child){
-    margin-bottom: 20px;
-}
 .skill-block, .years-work-block{
     position: relative;
     display: flex;
@@ -216,17 +208,6 @@ input::-webkit-inner-spin-button {
 }
 .add-emp{
     display: flex;
-}
-.cv-form-item-dop p{
-    text-align: left;
-    width: 100%;
-}
-.cv-form-item-emp p{
-    text-align: right;
-    width: 100%;
-}
-.cv-form-item-dop{
-    width: 70%;
 }
 .dop-title{
     max-width: max-content;
@@ -531,12 +512,6 @@ input::-webkit-inner-spin-button {
     }
 }
 @media(max-width: 875px){
-    .cv-form-item-dop{
-        width: 100%;
-    }
-    .cv-form-item-dop .dop-title{
-        display: none;
-    }
     .cv-form-items-dop{
         justify-content: space-between;
     }
