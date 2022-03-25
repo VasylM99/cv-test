@@ -397,12 +397,12 @@ input::-webkit-inner-spin-button {
     width: 70%
 }
 .form-item-salary input{
-    padding-right: 97px;
+    padding-right: 98px;
 }
 .type-salary-block{
     position: absolute;
     right: 0;
-    width: 97px;
+    width: 98px;
 }
 .type-salary{
     position: relative;
@@ -414,8 +414,10 @@ input::-webkit-inner-spin-button {
     border: none;
     padding: 0;
     padding-right: 25px;
-    text-align: right;
     outline: none;
+}
+.type-salary::before{
+    content: '/';
 }
 #res_salary::-webkit-input-placeholder::before{
     content:"Line 1\A Line 2\A Line 3\A"!important;

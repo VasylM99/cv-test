@@ -371,7 +371,6 @@ if (form){
         }
         if(event.target.classList.contains('dropdown-item')){
             event.target.closest('.dropdown').parentNode.querySelector('.dropdown-header').value = event.target.textContent;
-            event.target.closest('.dropdown').parentNode.querySelector('.dropdown-header').textContent = event.target.textContent;
             event.target.closest('.dropdown').classList.add('hide');
             event.target.closest('.dropdown').parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
         }
