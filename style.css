@@ -418,6 +418,7 @@ input::-webkit-inner-spin-button {
 }
 .type-salary::before{
     content: '/';
+    color: #8492A4;
 }
 #res_salary::-webkit-input-placeholder::before{
     content:"Line 1\A Line 2\A Line 3\A"!important;

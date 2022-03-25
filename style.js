@@ -5,8 +5,15 @@ if (negotiatedSalary) {
     let period = document.querySelector('#res_period');
     let negotiatedSalaryLabel = document.querySelector('.neg-label');
     desiredSalary.oninput = function () {
-        if(this.value.length > 7){
-            this.value = this.value.slice(0, 7);
+        if (this.value) {
+            if(this.value.length > 7){
+                this.value = this.value.slice(0, 7);
+            }
+            period.disabled = false;
+            period.classList.remove('disabled-input');
+        }else{
+            period.disabled = true;
+            period.classList.add('disabled-input');
         }
     }
     window.addEventListener('resize', ()=>{
@@ -28,7 +35,6 @@ if (negotiatedSalary) {
             desiredSalary.value = '';
             period.classList.add('disabled-input');
             period.disabled = true;
-            period.value = '';
             negotiatedSalaryLabel.querySelector('div').style.background = '#50A718';
         }else{
             desiredSalary.style.opacity = '1';
