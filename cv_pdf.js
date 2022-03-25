@@ -59,7 +59,7 @@ async function createPdf(){
         eduUl.push(edu[i].inst + ': ' + edu[i].spec);
     }
 
-    let exp = res_user.education;
+    let exp = res_user.experience;
     let expUl = [];
     for (let i = 0; i < exp.length; i++) {
         expUl.push(exp[i].place + ': ' + exp[i].prof + ' ' + exp[i].stand);
@@ -75,6 +75,7 @@ async function createPdf(){
     let position = res_user.position;
     let job = res_user.job;
     let salary = res_user.salary;
+    let sal_period = res_user.sal_period;
 
     let inpFiles = document.querySelector('#res_photo').files;
     let usrPhoto = inpFiles[0];
@@ -98,10 +99,10 @@ async function createPdf(){
                 style: [ 'header', 'mainStyle' ]
             },
             {
-                text:'\nСтрана проживания: ' + res_user.country +
-                    '\nТелефон: ' + res_user.phone +
-                    '\nEmail: ' + res_user.email +
-                    '\nГод рождения: ' + res_user.age,
+                text:(res_user.country.length ? '\nСтрана проживания: ' + res_user.country : '') +
+                    (res_user.phone.length ? '\nТелефон: ' + res_user.phone : '') +
+                    (res_user.email.length ? '\nEmail: ' + res_user.email : '') +
+                    (res_user.age.length ? '\nГод рождения: ' + res_user.age : ''),
                 style: [ 'mainStyle' ],
             },
             {
@@ -109,7 +110,7 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (socialUl == '' ? '' : '\nСоциальные сети:'),
+                text: (socialUl.length ? '\nСоциальные сети:' : ''),
                 style: [ 'mainStyle' ],
             },
             {
@@ -157,21 +158,34 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
+                text: (sal_period.length ? 'Период заработной платы: ' + sal_period : ''),
+                style: [ 'mainStyle' ],
+            },
+
+            {
                 text: (res_user.hasDoc ? '\nДокументы: ': '') + (res_user.bio ? 'Биометрия': '') +
                     (res_user.visa ? 'Рабочая виза': '') + (res_user.gcart ? 'Green card': ''),
                 style: ['mainStyle' ],
             },
             {
-                text: (expUl.length ? '\nОпыт работы: ' : '\nОпыт работы: Без опыта работы'),
+                text: (res_user.no_exp ? '\nОпыт работы': (expUl.length ? '\nОпыт работы: ' : '')),
                 style: ['subheader', 'mainStyle' ],
+            },
+            {
+                text: (res_user.no_exp ? 'Без опыта работы' : ''),
+                style: [ 'mainStyle' ]
             },
             {
                 ul : expUl,
                 style: [ 'mainStyle' ],
             },
             {
-                text: (eduUl.length ? '\nОбразование: ' : '\nОбразование: Без образования'),
+                text: (res_user.no_edc ? '\nОбразование: ' :(eduUl.length ? '\nОбразование: ' : '')),
                 style: ['subheader', 'mainStyle' ],
+            },
+            {
+                text: (res_user.no_edc ? 'Без образования' : ''),
+                style: [ 'mainStyle' ]
             },
             {
                 ul : eduUl,
@@ -182,17 +196,16 @@ async function createPdf(){
                 style: ['subheader', 'mainStyle' ],
             },
             {
-                text: '\nТип занятости: ' + res_user.emp_type + '\n' +
-                    (res_user.hasAdt ? 'Додатково: ' : ''),
+                text: (res_user.emp_type.length ? 'Тип занятости: ' + res_user.emp_type : ''),
                 style: [ 'mainStyle' ],
             },
             {
-                text: (res_user.desc == '' ? '': '\nОписание'),
+                text: (res_user.desc.length ? '\nОписание': ''),
                 style: ['subheader', 'mainStyle' ],
             },
 
             {
-                text: (res_user.desc == '' ? '' : res_user.desc),
+                text: (res_user.desc.length ? res_user.desc : ''),
                 style: [ 'mainStyle' ],
             }
         ],

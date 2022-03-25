@@ -16,6 +16,7 @@ function getResUser(){
         position: [],
         city: [],
         salary: "",
+        sal_period: "",
         fixedSalary: false,
         job: [],
         langs: [],
@@ -45,6 +46,7 @@ function getResUser(){
     res_user.emp_type = document.querySelector('#res_employment_type').value;
     res_user.driver = document.querySelector('#res_dl').value;
     res_user.job = document.querySelector('#res_job_cat').value.split('; ');
+    res_user.sal_period = document.querySelector('#res_period').value;
 
     res_user.has_dl = (document.querySelector('#res_has_dl:checked')) ? true : false;
     res_user.fixedSalary = (document.querySelector('#res_negotiated-salary:checked')) ? true : false;
@@ -177,6 +179,7 @@ function generate() {
 
             city: res_user.city,
             salary: res_user.salary,
+            sal_period: res_user.sal_period,
             fixedSalary: res_user.fixedSalary,
             job: res_user.job,
             position: res_user.position,
