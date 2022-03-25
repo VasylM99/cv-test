@@ -171,12 +171,7 @@ input::-webkit-inner-spin-button {
 .cv-form-field:focus{
     background: #FFFFFF;
 }
-.negotiated-salary{
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    padding-top: 5px;
-}
+
 .cv-form-block-doc{
     justify-content: space-between;
     flex-wrap: wrap;
@@ -398,9 +393,11 @@ input::-webkit-inner-spin-button {
 }
 
 .form-item-salary{
-    width: 60%
+    width: 65%
 }
-
+.type-salary{
+    width: 30%;
+}
 .form-item-neg-salary{
     width: 33%;
     justify-content: flex-start;

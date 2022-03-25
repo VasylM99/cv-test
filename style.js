@@ -2,16 +2,22 @@ let bodyBlock = document.querySelector('body');
 let negotiatedSalary = document.querySelector('#res_negotiated-salary');
 if (negotiatedSalary) {
     let desiredSalary = document.querySelector('#res_salary');
+    let period = document.querySelector('#res_period');
     let negotiatedSalaryLabel = document.querySelector('.neg-label');
     negotiatedSalary.addEventListener('change', function () {
         if(negotiatedSalary.checked){
             desiredSalary.style.opacity = '0.4';
             desiredSalary.disabled = true;
             desiredSalary.value = '';
+            period.classList.add('disabled-input');
+            period.disabled = true;
+            period.value = '';
             negotiatedSalaryLabel.querySelector('div').style.background = '#50A718';
         }else{
             desiredSalary.style.opacity = '1';
             desiredSalary.disabled = false;
+            period.classList.remove('disabled-input');
+            period.disabled = false;
             negotiatedSalaryLabel.querySelector('div').style.background = 'transparent';
         }
     })
