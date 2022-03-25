@@ -44,6 +44,7 @@ function getResUser(){
     res_user.desc = document.querySelector('#res_desc').value;
     res_user.emp_type = document.querySelector('#res_employment_type').value;
     res_user.driver = document.querySelector('#res_dl').value;
+    res_user.job = document.querySelector('#res_job_cat').value.split('; ');
 
     res_user.has_dl = (document.querySelector('#res_has_dl:checked')) ? true : false;
     res_user.fixedSalary = (document.querySelector('#res_negotiated-salary:checked')) ? true : false;
@@ -53,7 +54,6 @@ function getResUser(){
     if(res_user.bio || res_user.visa || res_user.gcart){res_user.hasDoc = true};
     res_user.no_exp = (document.querySelector('#dop-exp:checked')) ? true : false;
     res_user.no_edc = (document.querySelector('#dop-edc:checked')) ? true : false;
-    if(res_user.no_lang || res_user.no_exp || res_user.no_edc){res_user.hasAdt = true};
 
     let socialPlatforms = document.querySelector('#social-section').querySelectorAll('.res_sc_plat');
     let socialLinks = document.querySelector('#social-section').querySelectorAll('.res_sc_link');
@@ -78,14 +78,6 @@ function getResUser(){
         }
     }
 
-
-    let j_cat = document.querySelector('#job-section').querySelectorAll('.cv-field-job');
-    let position = document.querySelector('#job-section').querySelectorAll('.cv-field-position');
-    for (let i = 0; i < j_cat.length; i++){
-        if (j_cat[i].value && position[i].value){
-            res_user.job.push({cat: j_cat[i].value, position: position[i].value});
-        }
-    }
 
     let eduInst = document.querySelector('#cv-form-items-edu').querySelectorAll('.edu-institution');
     let eduSpec = document.querySelector('#cv-form-items-edu').querySelectorAll('.edu-speciality');
@@ -187,6 +179,7 @@ function generate() {
             salary: res_user.salary,
             fixedSalary: res_user.fixedSalary,
             job: res_user.job,
+            position: res_user.position,
             langs: res_user.langs,
             education: res_user.education,
             experience: res_user.experience,

@@ -65,12 +65,6 @@ async function createPdf(){
         expUl.push(exp[i].place + ': ' + exp[i].prof + ' ' + exp[i].stand);
     }
 
-    let job = res_user.job;
-    let jobUl = [];
-    for (let i = 0; i < job.length; i++) {
-        jobUl.push(job[i].cat + ': ' + job[i].position);
-    }
-
     let social = res_user.social;
     let socialUl = [];
     for (let i = 0; i < social.length; i++){
@@ -78,6 +72,8 @@ async function createPdf(){
     }
 
     let city = res_user.city;
+    let position = res_user.position;
+    let job = res_user.job;
     let salary = res_user.salary;
 
     let inpFiles = document.querySelector('#res_photo').files;
@@ -109,11 +105,11 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (res_user.has_dl ? 'Водительские права: ' + res_user.driver : ''),
+                text: (res_user.has_dl ? '\nВодительские права: ' + res_user.driver : ''),
                 style: [ 'mainStyle' ],
             },
             {
-                text: (socialUl == '' ? '' : 'Социальные сети:'),
+                text: (socialUl == '' ? '' : '\nСоциальные сети:'),
                 style: [ 'mainStyle' ],
             },
             {
@@ -125,7 +121,23 @@ async function createPdf(){
                 style: 'subheader'
             },
             {
-                text: (city == '' ? '' : 'Желаемый город работы: '),
+                text: (position.length ? '\nДолжность:' : ''),
+                style: [ 'mainStyle' ],
+            },
+            {
+                ul: position,
+                style: [ 'mainStyle' ],
+            },
+            {
+                text: (job.length ? '\nКатегория:' : ''),
+                style: [ 'mainStyle' ],
+            },
+            {
+                ul: job,
+                style: [ 'mainStyle' ],
+            },
+            {
+                text: (city.length ? '\nЖелаемый город работы: ' : ''),
                 style: [ 'mainStyle' ],
             },
             {
@@ -133,7 +145,7 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (langsUl == '' ? '' : 'Владение языками:'),
+                text: (langsUl.length ? '\nВладение языками:' : ''),
                 style: [ 'mainStyle' ],
             },
             {
@@ -141,24 +153,16 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (salary == '' ? 'Желаемая заработная плата: Договорная' : 'Желаемая заработная плата: ' + salary),
+                text: (salary.length ? '\nЖелаемая заработная плата: ' + salary : '\nЖелаемая заработная плата: Договорная'),
                 style: [ 'mainStyle' ],
             },
             {
-                text: (res_user.hasDoc ? 'Документы: ': '') + (res_user.bio ? 'Биометрия': '') +
+                text: (res_user.hasDoc ? '\nДокументы: ': '') + (res_user.bio ? 'Биометрия': '') +
                     (res_user.visa ? 'Рабочая виза': '') + (res_user.gcart ? 'Green card': ''),
                 style: ['mainStyle' ],
             },
             {
-                text: '\nНаправление работы',
-                style: ['subheader', 'mainStyle' ],
-            },
-            {
-                ul : jobUl,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: '\nОпыт работы',
+                text: (expUl.length ? '\nОпыт работы: ' : '\nОпыт работы: Без опыта работы'),
                 style: ['subheader', 'mainStyle' ],
             },
             {
@@ -166,7 +170,7 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: '\nОбразование',
+                text: (eduUl.length ? '\nОбразование: ' : '\nОбразование: Без образования'),
                 style: ['subheader', 'mainStyle' ],
             },
             {
@@ -178,16 +182,8 @@ async function createPdf(){
                 style: ['subheader', 'mainStyle' ],
             },
             {
-                text: 'Тип занятости: ' + res_user.emp_type + '\n' +
+                text: '\nТип занятости: ' + res_user.emp_type + '\n' +
                     (res_user.hasAdt ? 'Додатково: ' : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                ul: [
-                    (res_user.no_lang ? 'Без знания языка': ''),
-                    (res_user.no_exp ? 'Без образовния': ''),
-                    (res_user.no_edc? 'Без опыта работы': ''),
-                ],
                 style: [ 'mainStyle' ],
             },
             {
