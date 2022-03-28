@@ -1,3 +1,12 @@
+function funcReadOnly(el) {
+    el.addEventListener('keydown', function (e) {
+        if(e.keyCode === 8 || e.keyCode === 46){
+            e.preventDefault();
+        }
+        e.preventDefault();
+    })
+}
+
 let bodyBlock = document.querySelector('body');
 let negotiatedSalary = document.querySelector('#res_negotiated-salary');
 if (negotiatedSalary) {
@@ -49,6 +58,7 @@ let driverLicense = document.querySelector('#res_has_dl');
 if (driverLicense) {
     let driverInput = document.querySelector('#res_dl');
     let driverLicenseLabel = document.querySelector('.cdl-label');
+    funcReadOnly(driverInput);
     driverLicense.addEventListener('change', function () {
         if(driverLicense.checked){
             driverLicenseLabel.querySelector('div').style.background = '#50A718';
@@ -77,12 +87,14 @@ if(socialMediaBlock){
     let add = socialMediaBlock.querySelector('.add');
     let addBlock = socialMediaBlock.querySelector('.add-item-block');
     let addItem = socialMediaBlock.querySelector('.add-item');
+    
     add.addEventListener('click', function () {
         if(addBlock.children.length < 5){
             let socialMediaBlockClone = addItem.cloneNode(true);
             socialMediaBlockClone.querySelector('.res_sc_plat').value = '';
             socialMediaBlockClone.querySelector('.res_sc_link').value = '';
             socialMediaBlockClone.querySelector('.res_sc_link').readOnly = true;
+            socialMediaBlockClone.querySelector('.res_sc_link').required = false;
             socialMediaBlockClone.querySelector('.res_sc_link').classList.add('disabled-input');
             addBlock.appendChild(socialMediaBlockClone);
         }
@@ -122,13 +134,15 @@ if(languageBlock){
     let addBlock = languageBlock.querySelector('.add-item-block');
     let addItem = languageBlock.querySelector('.add-item');
     let numLanguage = addBlock.querySelector('.dropdown').querySelectorAll('.dropdown-item').length -1;
+    funcReadOnly(languageBlock.querySelector('#res_language-skills'));
     add.addEventListener('click', function () {
         if(addBlock.children.length <= numLanguage){
             let languageBlockClone = addItem.cloneNode(true);
             languageBlockClone.querySelector('.cv-field-lang').value = '';
             languageBlockClone.querySelector('.cv-field-skill').value = '';
-            languageBlockClone.querySelector('#res_language-skills').classList.remove('dropdown-header');
             languageBlockClone.querySelector('#res_language-skills').classList.add('disabled-input');
+            languageBlockClone.querySelector('#res_language-skills').required = false;
+            funcReadOnly(languageBlockClone.querySelector('#res_language-skills'));
             addBlock.appendChild(languageBlockClone);
         }
         if(addBlock.children.length > 1){
@@ -379,6 +393,22 @@ if (form){
             event.target.closest('.dropdown').parentNode.querySelector('.dropdown-header').value = event.target.textContent;
             event.target.closest('.dropdown').classList.add('hide');
             event.target.closest('.dropdown').parentNode.querySelector('.cv-form-svg-open').classList.toggle('rotate');
+            if(event.target.closest('.dropdown').parentNode.querySelector('.dropdown-header')){
+                if(event.target.closest('.sc-block')){
+                    console.log(event.target);
+                    event.target.closest('.cv-form-block').querySelector('.input-change').classList.remove('disabled-input');
+                    event.target.closest('.cv-form-block').querySelector('.input-change').required = true;
+                    event.target.closest('.cv-form-block').querySelector('.input-change').readOnly = false;
+                }
+                if(event.target.closest('.language-block')){
+                    console.log(event.target);
+                    event.target.closest('.cv-form-block').querySelector('.input-change').classList.remove('disabled-input');
+                    event.target.closest('.cv-form-block').querySelector('.input-change').required = true;
+
+                }
+
+            }
+            
         }
         bodyBlock.addEventListener('click', function (event) {
             if(!event.target.closest('.dropdown-block')){
@@ -475,19 +505,4 @@ if(catBlock){
         } 
     })
 }
-function inputSc(inputLink) {
-    let input = inputLink.closest('.cv-form-block').querySelector('.res_sc_plat');
-    if(input.value){
-        inputLink.readOnly = false;
-        inputLink.required = true;
-        inputLink.classList.remove('disabled-input');
-    }
-}
-function inputLang(languageSkill) {
-    let language = languageSkill.closest('.cv-form-block').querySelector('#res_language');
-    if(language.value){
-        languageSkill.classList.add('dropdown-header');
-        languageSkill.classList.remove('disabled-input');
-        languageSkill.required = true;
-    }
-}
+

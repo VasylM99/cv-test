@@ -443,12 +443,6 @@ input[type="text"].short-description{
     pointer-events: none;
     cursor: pointer;
 }
-.skill-block .disabled-input{
-    pointer-events: auto;
-}
-.social-media-link-block .disabled-input{
-    pointer-events: auto;
-}
 .readonly{
     caret-color: transparent !important;
 }
