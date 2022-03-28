@@ -130,7 +130,7 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (job.length ? '\nКатегория:' : ''),
+                text: (job[0].length ? '\nКатегория:' : ''),
                 style: [ 'mainStyle' ],
             },
             {
@@ -138,7 +138,7 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (city.length ? '\nЖелаемый город работы: ' : ''),
+                text: (city[0].length ? '\nЖелаемый город работы: ' : ''),
                 style: [ 'mainStyle' ],
             },
             {
@@ -154,11 +154,11 @@ async function createPdf(){
                 style: [ 'mainStyle' ],
             },
             {
-                text: (salary.length ? '\nЖелаемая заработная плата: ' + salary : '\nЖелаемая заработная плата: Договорная'),
+                text: (res_user.fixedSalary ? '\nЖелаемая заработная плата: Договорная' : (salary.length ? '\nЖелаемая заработная плата: ' + salary : '' )),
                 style: [ 'mainStyle' ],
             },
             {
-                text: (sal_period.length ? 'Период заработной платы: ' + sal_period : ''),
+                text: (res_user.fixedSalary ? '' :(salary.length ? 'Период заработной платы: ' + sal_period : '')),
                 style: [ 'mainStyle' ],
             },
 

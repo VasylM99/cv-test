@@ -31,6 +31,7 @@ function getResUser(){
         no_edc: false,
         no_exp: false,
         emp_type: "",
+        s_desc: "",
         desc: "",
     };
 
@@ -47,6 +48,7 @@ function getResUser(){
     res_user.driver = document.querySelector('#res_dl').value;
     res_user.job = document.querySelector('#res_job_cat').value.split('; ');
     res_user.sal_period = document.querySelector('#res_period').value;
+    res_user.s_desc = document.querySelector('#res_short_description').value;
 
     res_user.has_dl = (document.querySelector('#res_has_dl:checked')) ? true : false;
     res_user.fixedSalary = (document.querySelector('#res_negotiated-salary:checked')) ? true : false;
@@ -163,31 +165,80 @@ function generate() {
             .attachModule(imageModule)
             .compile({ paragraphLoop: true });
 
-        let hasDesc =  (res_user.desc == '' ? false : true);
-        console.log(hasDesc);
+        let hasEmail = (res_user.email.length ? true : false);
+        let hasPhone = (res_user.phone.length ? true : false);
+        let hasCountry = (res_user.country.length ? true : false);
+        let hasAge = (res_user.age.length ? true : false);
+        let hasSocial = (res_user.social.length ? true : false);
+        let hasCity = (res_user.city[0].length ? true : false);
+        let hasJob = (res_user.job[0].length ? true : false);
+        let hasPosition = (res_user.position.length ? true : false);
+        let hasSalary = (res_user.salary.length ? true : false);
+        let hasPeriod = (res_user.salary.length ? true : false);
+        let hasEmp = (res_user.emp_type.length ? true : false);
+        let hasLang = (res_user.langs.length ? true : false);
+        let hasEdc = (res_user.education.length ? true : false);
+        let hasExp = (res_user.experience.length ? true : false);
+        let hasShDesc =  (res_user.s_desc.length ? true : false);
+        let hasDesc =  (res_user.desc.length ? true : false);
 
         doc.resolveData({
             image: imgPath,
             first_name: res_user.f_name,
             last_name: res_user.l_name,
-            phone: res_user.phone,
-            email: res_user.email,
-            social: res_user.social,
-            country: res_user.country,
-            age: res_user.age,
-            driver: res_user.driver,
 
-            city: res_user.city,
-            salary: res_user.salary,
-            sal_period: res_user.sal_period,
-            fixedSalary: res_user.fixedSalary,
-            job: res_user.job,
-            position: res_user.position,
-            langs: res_user.langs,
-            education: res_user.education,
-            experience: res_user.experience,
+            hasShDesc: hasShDesc,
+            s_description: res_user.s_desc,
+
+            hasPhone: hasPhone,
+            phone: res_user.phone,
+
+            hasEmail: hasEmail,
+            email: res_user.email,
+
+            hasSocial: hasSocial,
+            social: res_user.social,
+
+            hasCountry: hasCountry,
+            country: res_user.country,
+
+            hasAge: hasAge,
+            age: res_user.age,
 
             has_dl: res_user.has_dl,
+            driver: res_user.driver,
+
+            hasCity: hasCity,
+            city: res_user.city,
+
+            hasSalary: hasSalary,
+            salary: res_user.salary,
+
+            hasPeriod: hasPeriod,
+            sal_period: res_user.sal_period,
+            fixedSalary: res_user.fixedSalary,
+
+            hasJob: hasJob,
+            job: res_user.job,
+
+            hasPosition: hasPosition,
+            position: res_user.position,
+
+            hasLang: hasLang,
+            langs: res_user.langs,
+
+            hasEdc: hasEdc,
+            education: res_user.education,
+
+            hasExp: hasExp,
+            experience: res_user.experience,
+
+            hasEmp: hasEmp,
+            emp_type: res_user.emp_type,
+
+            hasDesc: hasDesc,
+            description: res_user.desc,
+
             bio: res_user.bio,
             visa: res_user.visa,
             green_cart: res_user.gcart,
@@ -195,8 +246,6 @@ function generate() {
             no_edc: res_user.no_edc,
             no_exp: res_user.no_exp,
             hasAdt: res_user.hasAdt,
-            emp_type: res_user.emp_type,
-            description: res_user.desc,
         }).then(function () {
             console.log('ready');
             doc.render();
