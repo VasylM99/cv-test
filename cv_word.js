@@ -115,7 +115,7 @@ function generate() {
     }
 
     loadFile("Template/template.docx",function(error,content){
-        if (error) { throw error };
+        if (error) { throw error }
 
         let opts = {}
         opts.centered = false;
@@ -165,22 +165,22 @@ function generate() {
             .attachModule(imageModule)
             .compile({ paragraphLoop: true });
 
-        let hasEmail = (res_user.email.length ? true : false);
-        let hasPhone = (res_user.phone.length ? true : false);
-        let hasCountry = (res_user.country.length ? true : false);
-        let hasAge = (res_user.age.length ? true : false);
-        let hasSocial = (res_user.social.length ? true : false);
-        let hasCity = (res_user.city[0].length ? true : false);
-        let hasJob = (res_user.job[0].length ? true : false);
-        let hasPosition = (res_user.position.length ? true : false);
-        let hasSalary = (res_user.salary.length ? true : false);
-        let hasPeriod = (res_user.salary.length ? true : false);
-        let hasEmp = (res_user.emp_type.length ? true : false);
-        let hasLang = (res_user.langs.length ? true : false);
-        let hasEdc = (res_user.education.length ? true : false);
-        let hasExp = (res_user.experience.length ? true : false);
-        let hasShDesc =  (res_user.s_desc.length ? true : false);
-        let hasDesc =  (res_user.desc.length ? true : false);
+        let hasEmail = (!!res_user.email.length);
+        let hasPhone = (!!res_user.phone.length);
+        let hasCountry = (!!res_user.country.length);
+        let hasAge = (!!res_user.age.length);
+        let hasSocial = (!!res_user.social.length);
+        let hasCity = (!!res_user.city[0].length);
+        let hasJob = (!!res_user.job[0].length);
+        let hasPosition = (!!res_user.position.length);
+        let hasSalary = (res_user.salary.length ? true : (res_user.fixedSalary));
+        let hasPeriod = (!!res_user.salary.length);
+        let hasEmp = (!!res_user.emp_type.length);
+        let hasLang = (!!res_user.langs.length);
+        let hasEdc = (!!res_user.education.length);
+        let hasExp = (!!res_user.experience.length);
+        let hasShDesc =  (!!res_user.s_desc.length);
+        let hasDesc =  (!!res_user.desc.length);
 
         doc.resolveData({
             image: imgPath,

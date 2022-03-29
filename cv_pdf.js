@@ -99,6 +99,10 @@ async function createPdf(){
                 style: [ 'header', 'mainStyle' ]
             },
             {
+                text: res_user.s_desc,
+                style: ['subheader', 'mainStyle'],
+            },
+            {
                 text:(res_user.country.length ? '\nСтрана проживания: ' + res_user.country : '') +
                     (res_user.phone.length ? '\nТелефон: ' + res_user.phone : '') +
                     (res_user.email.length ? '\nEmail: ' + res_user.email : '') +
@@ -216,7 +220,6 @@ async function createPdf(){
             },
             subheader: {
                 fontSize: 15,
-                bold: true
             },
             mainStyle:{
                 lineHeight: 1.4,
