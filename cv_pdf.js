@@ -9,8 +9,8 @@ function getBase64ImageFromURL(url) {
             let imgW = img.width;
             let imgH = img.height;
 
-            canvas.width = 200;
-            canvas.height = 200;
+            canvas.width = 150;
+            canvas.height = 150;
 
             console.log(canvas.width);
             console.log(canvas.height);
@@ -27,11 +27,13 @@ function getBase64ImageFromURL(url) {
             let ctx = canvas.getContext("2d");
             ctx.save();
             ctx.beginPath();
-            ctx.arc(set, set, set, 0, Math.PI * 2, true);
+            ctx.arc(set + 1, set + 1, set - 2, 0, Math.PI * 2, true);
+            ctx.strokeStyle = "#000";
+            ctx.stroke();
             ctx.closePath();
             ctx.clip();
 
-            ctx.drawImage(img, 0, 0, 200, (imgH * 200)/imgW);
+            ctx.drawImage(img, 0, 0, 150, (imgH * 150)/imgW);
 
 
             let dataURL = canvas.toDataURL("image/png");
@@ -93,7 +95,7 @@ async function createPdf(){
         layout: 'lightHorizontalLines',
         table: {
             headerRows: 1,
-            widths: ['*', 'auto'],
+            widths: ['auto', '*'],
             body: contactInfo,
         }
     };
@@ -106,7 +108,24 @@ async function createPdf(){
             body: socialInfo,
         }
     };
+    let jobExp = {
 
+    }
+    let line = {
+        table : {
+            headerRows : 1,
+            widths: ['100%'],
+            body : [
+                [{text:'',border: [false, true, false,false]}]
+            ] 
+        },
+        layout : {
+            hLineColor: function (i, node) {
+                return (i === 0 || i === node.table.body.length) ? '#d9d9d9' : '#d9d9d9';
+            }
+        },
+        margin: [0, 25, 0, 25]
+    };
     let city = res_user.city;
     let position = res_user.position;
     let job = res_user.job;
@@ -123,17 +142,86 @@ async function createPdf(){
         //     image: await this.getBase64ImageFromURL('./Template/header.png'),
         // },
         content: [
-            {
-                image: await this.getBase64ImageFromURL(imgPath),
+            { 
+                columns: [ 
+                    { 
+                        width: 150,
+                        image: await this.getBase64ImageFromURL(imgPath),
+                    }, 
+                    { 
+                        width: 'auto',
+                        type: 'none',
+                        ol: [
+                                {
+                                    text: 'this date',
+                                    style: 'textHeader'
+                                },
+                                {
+                                    text: res_user.f_name + ' ' + res_user.l_name,
+                                    margin: [0, 0, 0, 20],
+                                    color: '#3D4857',
+                                    fontSize: 30,
+                                    bold: true
+                                },
+                                {
+                                    text: 'Короткое описание:',
+                                    style: 'textHeader'
+                                },
+                                {
+                                    text: res_user.s_desc,
+                                    margin: [0, 0, 0, 15],
+                                    color: '#3D4857',
+                                    bold: true,
+                                    fontSize: 20
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            width: 'auto',
+                                            text: (res_user.emp_type.length ? 'Тип занятости: ' : ''),
+                                            style: 'textHeader'
+                                        },
+                                        {
+                                            width: 'auto',
+                                            text:  (res_user.emp_type.length ? res_user.emp_type : ''), 
+                                            style: 'textHeader',
+                                            color: '#3D4857'
+                                        }
+                                    ],
+                                    columnGap: 10
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            width: 'auto',
+                                            text:'Год рождения: ', 
+                                            style:'textHeader'
+                                        },
+                                        {
+                                            width: 'auto',
+                                            text: res_user.age,
+                                            style:'textHeader',
+                                            color: '#3D4857'
+                                        },
+                                        {
+                                            width: 'auto',
+                                            text:'Страна проживания: ', 
+                                            style:'textHeader'
+                                        },
+                                        {
+                                            width: 'auto',
+                                            text: res_user.country,
+                                            style:'textHeader',
+                                            color: '#3D4857'
+                                        }
+                                    ],
+                                    columnGap: 10
+                                }
+                        ]
+                    } 
+                ] 
             },
-            {
-                text: res_user.f_name + ' ' + res_user.l_name,
-                style: [ 'header', 'mainStyle' ]
-            },
-            {
-                text: res_user.s_desc,
-                style: ['subheader', 'mainStyle'],
-            },
+            line,
             tableContact,
             tableSocial,
             {
@@ -264,6 +352,11 @@ async function createPdf(){
             },
             small: {
                 fontSize: 8
+            },
+            textHeader: {
+                fontSize: 10,
+                bold: true,
+                color: '#8492A4'
             }
         }
 
