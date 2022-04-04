@@ -443,6 +443,16 @@ input[type="text"].short-description{
     pointer-events: none;
     cursor: pointer;
 }
+
+.cv-form-svg{
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+.disabled-input ~ .cv-form-svg{
+    opacity: .4;
+}
+
 .readonly{
     caret-color: transparent !important;
 }
