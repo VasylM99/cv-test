@@ -1,21 +1,3 @@
-function getWidth(url, fixedH = 0){
-    return new Promise((resolve, reject) => {
-        let imgT = new Image();
-        imgT.setAttribute("crossOrigin", "anonymous");
-        imgT.onload = () => {
-            let imgW = imgT.width;
-            let imgH = imgT.height;
-            if (fixedH ? fixedH=fixedH : fixedH=imgH);
-            imgW = (fixedH * imgW) / imgH;
-            resolve(imgW);
-        };
-        imgT.onerror = error => {
-            reject(error);
-        };
-        imgT.src = url;
-    });
-}
-
 function getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
         let img = new Image();
@@ -24,11 +6,33 @@ function getBase64ImageFromURL(url) {
         img.onload = () => {
             let canvas = document.createElement("canvas");
 
-            canvas.width = img.width;
-            canvas.height = img.height;
+            let imgW = img.width;
+            let imgH = img.height;
+
+            canvas.width = 200;
+            canvas.height = 200;
+
+            console.log(canvas.width);
+            console.log(canvas.height);
+
+            let set;
+            if (canvas.height > canvas.width){
+                set = canvas.width/2;
+            }
+            else {
+                set = canvas.height/2;
+            }
+            console.log(set);
 
             let ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(set, set, set, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.clip();
+
+            ctx.drawImage(img, 0, 0, 200, (imgH * 200)/imgW);
+
 
             let dataURL = canvas.toDataURL("image/png");
 
@@ -71,16 +75,46 @@ async function createPdf(){
         socialUl.push(social[i].platform + ': ' + social[i].link );
     }
 
+    let contactInfo = [];
+    contactInfo.push([{text:'Контактная информация', fontSize: 15}, ''])
+    if (res_user.country.length){contactInfo.push(['Страна проживания', res_user.country])}
+    if (res_user.phone.length){contactInfo.push(['Телефон', res_user.phone])}
+    if (res_user.email.length){contactInfo.push(['Email', res_user.email])}
+    if (res_user.age.length){contactInfo.push(['Год рождения', res_user.age])}
+    console.log(contactInfo.length);
+
+    let socialInfo = [];
+    socialInfo.push([{text:'\nСоциальные сети', fontSize: 15}, ''])
+    for (let i = 0; i < social.length; i++){
+        socialInfo.push([social[i].platform, social[i].link ]);
+    }
+
+    let tableContact = {
+        layout: 'lightHorizontalLines',
+        table: {
+            headerRows: 1,
+            widths: ['*', 'auto'],
+            body: contactInfo,
+        }
+    };
+
+    let tableSocial = {
+        layout: 'lightHorizontalLines',
+        table: {
+            headerRows: 1,
+            widths: ['*', 'auto'],
+            body: socialInfo,
+        }
+    };
+
     let city = res_user.city;
     let position = res_user.position;
     let job = res_user.job;
     let salary = res_user.salary;
     let sal_period = res_user.sal_period;
-
     let inpFiles = document.querySelector('#res_photo').files;
     let usrPhoto = inpFiles[0];
     let imgPath = './unknown.jpg';
-    let imgHei = 200;
 
     if (usrPhoto){ imgPath = URL.createObjectURL(usrPhoto);}
 
@@ -91,8 +125,6 @@ async function createPdf(){
         content: [
             {
                 image: await this.getBase64ImageFromURL(imgPath),
-                width: await this.getWidth(imgPath, imgHei),
-                height: imgHei,
             },
             {
                 text: res_user.f_name + ' ' + res_user.l_name,
@@ -102,6 +134,8 @@ async function createPdf(){
                 text: res_user.s_desc,
                 style: ['subheader', 'mainStyle'],
             },
+            tableContact,
+            tableSocial,
             {
                 text:(res_user.country.length ? '\nСтрана проживания: ' + res_user.country : '') +
                     (res_user.phone.length ? '\nТелефон: ' + res_user.phone : '') +
