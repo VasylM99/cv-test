@@ -68,6 +68,7 @@ if (driverLicense) {
             driverLicenseLabel.querySelector('div').style.background = 'transparent';
             driverInput.classList.add('disabled-input');
             driverInput.required = false;
+            driverInput.style.borderColor = '#E9E9E9';
         }
     })
 }
@@ -250,14 +251,16 @@ if(eduBlock){
             addContainer.style.display = 'block';
         }
     })
-    addBlock.addEventListener('change', function (e) {
+    addBlock.addEventListener('input', function (e) {
         if(e.target.classList.contains('edu-institution')){
             if(e.target.value){
                 e.target.closest('.add-item').children[1].querySelector('input').classList.remove('disabled-input');
                 e.target.closest('.add-item').children[1].querySelector('input').disabled = false;
+                e.target.closest('.add-item').children[1].querySelector('input').required = true;
             }else{
                 e.target.closest('.add-item').children[1].querySelector('input').classList.add('disabled-input');
                 e.target.closest('.add-item').children[1].querySelector('input').disabled = true;
+                e.target.closest('.add-item').children[1].querySelector('input').required = false;
             }
         }
         
@@ -325,18 +328,22 @@ if(expBlock){
             addContainer.style.display = 'block';
         }
     })
-    addBlock.addEventListener('change', function (e) {
+    addBlock.addEventListener('input', function (e) {
         if(e.target.classList.contains('work-place')){
             if(e.target.value){
                 e.target.closest('.add-item').children[1].querySelector('input').classList.remove('disabled-input');
                 e.target.closest('.add-item').children[2].querySelector('input').classList.remove('disabled-input');
                 e.target.closest('.add-item').children[1].querySelector('input').disabled = false;
                 e.target.closest('.add-item').children[2].querySelector('input').disabled = false;
+                e.target.closest('.add-item').children[1].querySelector('input').required = true;
+                e.target.closest('.add-item').children[2].querySelector('input').required = true;
             }else{
                 e.target.closest('.add-item').children[1].querySelector('input').classList.add('disabled-input');
                 e.target.closest('.add-item').children[2].querySelector('input').classList.add('disabled-input');
                 e.target.closest('.add-item').children[1].querySelector('input').disabled = true;
                 e.target.closest('.add-item').children[2].querySelector('input').disabled = true;
+                e.target.closest('.add-item').children[1].querySelector('input').required = false;
+                e.target.closest('.add-item').children[2].querySelector('input').required = false;
             }
         }
     })

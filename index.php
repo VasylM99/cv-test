@@ -196,6 +196,7 @@
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-item">CDL</li>
                                     <li class="dropdown-item">Non-CDL</li>
+                                    <li class="dropdown-item">Стандартные</li>
                                 </ul>
                             </div>
                         </div>

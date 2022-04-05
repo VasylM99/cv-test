@@ -103,6 +103,24 @@ function getResUser(){
     return res_user;
 }
 
+function createWordValid() {
+    let requiredField = document.querySelector('.cv-form').querySelectorAll('[required]');
+    let invalidField = [];
+    for (let i = 0; i < requiredField.length; i++) {
+        if (!requiredField[i].value) {
+            invalidField.push(requiredField[i]);
+        }else{
+            requiredField[i].style.borderColor = '#E9E9E9';
+        }
+    }
+    if(invalidField.length){
+        for (let i = 0; i < invalidField.length; i++) {
+            invalidField[i].style.borderColor = 'red';  
+        }
+    }else{
+        generate();
+    }  
+}
 function generate() {
 
     let res_user = getResUser();
