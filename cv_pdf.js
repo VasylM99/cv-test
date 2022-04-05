@@ -1,3 +1,51 @@
+function linePdf(){
+    let line = {
+        table : {
+            headerRows : 1,
+            widths: ['100%'],
+            body : [
+                [{text:'',border: [false, true, false,false]}]
+            ]
+        },
+        layout : {
+            hLineColor: function (i, node) {
+                return (i === 0 || i === node.table.body.length) ? '#d9d9d9' : '#d9d9d9';
+            }
+        },
+        margin: [0, 25, 0, 25]
+    };
+    return line;
+}
+
+function tablesPdf(tables){
+    let res = [];
+    let j = 0;
+    let line = linePdf();
+    for (let i = 0; i < Math.floor(tables.length/2); i++){
+        res.push({
+            columns: [
+                tables[j],
+                tables[j+1],
+            ],
+            columnGap: 25
+        });
+        res.push(line);
+        j += 2;
+    }
+    if (tables.length % 2){
+        res.push({
+            columns: [
+                tables[tables.length - 1],
+                [],
+            ],
+            columnGap: 25
+        });
+        res.push(line);
+    }
+    console.log(res);
+    return res;
+}
+
 function getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
         let img = new Image();
@@ -12,9 +60,6 @@ function getBase64ImageFromURL(url) {
             canvas.width = 150;
             canvas.height = 150;
 
-            console.log(canvas.width);
-            console.log(canvas.height);
-
             let set;
             if (canvas.height > canvas.width){
                 set = canvas.width/2;
@@ -22,7 +67,6 @@ function getBase64ImageFromURL(url) {
             else {
                 set = canvas.height/2;
             }
-            console.log(set);
 
             let ctx = canvas.getContext("2d");
             ctx.save();
@@ -49,101 +93,207 @@ function getBase64ImageFromURL(url) {
     });
 }
 
-function createPdfValid() {
-    let requiredField = document.querySelector('.cv-form').querySelectorAll('[required]');
-    let invalidField = [];
-    for (let i = 0; i < requiredField.length; i++) {
-        if (!requiredField[i].value) {
-            invalidField.push(requiredField[i]);
-        }else{
-            requiredField[i].style.borderColor = '#E9E9E9';
-        }
-    }
-    if(invalidField.length){
-        for (let i = 0; i < invalidField.length; i++) {
-            invalidField[i].style.borderColor = 'red';  
-        }
-    }else{
-        createPdf();
-    }  
-}
 async function createPdf(){
 
     let res_user = getResUser();
 
-    let langs = res_user.langs;
-    let langsUl = [];
-    for (let i = 0; i < langs.length; i++){
-        langsUl.push(langs[i].lang + ': ' + langs[i].skill );
-    }
-
-    let edu = res_user.education;
-    let eduUl = [];
-    for (let i = 0; i < edu.length; i++) {
-        eduUl.push(edu[i].inst + ': ' + edu[i].spec);
-    }
-
-    let exp = res_user.experience;
-    let expUl = [];
-    for (let i = 0; i < exp.length; i++) {
-        expUl.push(exp[i].place + ': ' + exp[i].prof + ' ' + exp[i].stand);
-    }
+    let tables = [];
 
     let social = res_user.social;
-    let socialUl = [];
-    for (let i = 0; i < social.length; i++){
-        socialUl.push(social[i].platform + ': ' + social[i].link );
-    }
-
     let contactInfo = [];
-    contactInfo.push([{text:'Контактная информация', fontSize: 15}, ''])
-    if (res_user.country.length){contactInfo.push(['Страна проживания', res_user.country])}
-    if (res_user.phone.length){contactInfo.push(['Телефон', res_user.phone])}
-    if (res_user.email.length){contactInfo.push(['Email', res_user.email])}
-    if (res_user.age.length){contactInfo.push(['Год рождения', res_user.age])}
-    console.log(contactInfo.length);
+    if (res_user.phone.length){contactInfo.push([{text:'Телефон', color: '#8492a4'}, {text: res_user.phone, color: '#3D4857',}])}
+    if (res_user.email.length){contactInfo.push([{text:'Email', color: '#8492a4'}, {text: res_user.email, color: '#3D4857',}])}
 
-    let socialInfo = [];
-    socialInfo.push([{text:'\nСоциальные сети', fontSize: 15}, ''])
     for (let i = 0; i < social.length; i++){
-        socialInfo.push([social[i].platform, social[i].link ]);
+        contactInfo.push([{text: social[i].platform, color: '#8492a4'}, {text: social[i].link, color: '#3D4857'} ]);
     }
 
-    let tableContact = {
-        layout: 'lightHorizontalLines',
-        table: {
-            headerRows: 1,
-            widths: ['auto', '*'],
-            body: contactInfo,
-        }
-    };
-
-    let tableSocial = {
-        layout: 'lightHorizontalLines',
-        table: {
-            headerRows: 1,
-            widths: ['*', 'auto'],
-            body: socialInfo,
-        }
-    };
-    let jobExp = {
-
-    }
-    let line = {
-        table : {
-            headerRows : 1,
-            widths: ['100%'],
-            body : [
-                [{text:'',border: [false, true, false,false]}]
-            ] 
+    let tableContact = [
+        {
+            text:'Контактная информация:',
+            fontSize: 15,
+            lineHeight: 1.5,
+            color: '#8492a4'
         },
-        layout : {
-            hLineColor: function (i, node) {
-                return (i === 0 || i === node.table.body.length) ? '#d9d9d9' : '#d9d9d9';
+        {
+            layout: 'noBorders',
+            table: {
+                headerRows: 1,
+                widths: ['auto', '*'],
+                body: contactInfo,
             }
+        }
+    ];
+
+
+    let docInfo = [];
+
+    let doc = '';
+    if(res_user.visa){doc = 'Рабочая виза'}
+    else if(res_user.bio){doc = 'Биометрия'}
+    else if(res_user.gcart){doc = 'Green card'}
+
+    if (doc.length){docInfo.push([{text:'Документы', color: '#8492a4'}, {text: res_user.driver, color: '#3D4857',}])}
+    if (res_user.driver.length){docInfo.push([{text:'Водительские права', color: '#8492a4'}, {text: res_user.driver, color: '#3D4857',}])}
+
+    let tableDoc = [
+        {
+            text:'Опыт работы:',
+            fontSize: 15,
+            lineHeight: 1.5,
+            color: '#8492a4'
         },
-        margin: [0, 25, 0, 25]
-    };
+        {
+            layout: 'noBorders',
+            table: {
+                headerRows: 1,
+                widths: ['auto', '*'],
+                body: docInfo,
+            }
+        }
+    ];
+
+    let langs = res_user.langs;
+    let langStr ='';
+    for (let i = 0; i < langs.length; i++){
+        langStr += (i ? '\n' : '') + langs[i].lang + ', ' + langs[i].skill;
+    }
+
+    let mainInfo = (langStr.length ? [[{text: 'Владение языками', color:'#8492a4'}, {text: langStr, color:'#3D4857'}]] : []);
+
+    let tableMain = [
+        {
+            text:'Основная информация:',
+            fontSize: 15,
+            lineHeight: 1.5,
+            color: '#8492a4'
+        },
+        {
+            layout: 'noBorders',
+            table: {
+                headerRows: 1,
+                widths: ['auto', '*'],
+                body: mainInfo,
+            }
+        }
+    ];
+
+
+    let edu = res_user.education;
+    let edcInfo = [];
+    for (let i = 0; i < edu.length; i++) {
+        let edplace = 'Учебное заведение';
+        let edplaceval = edu[i].inst;
+        if (i > 0){ edplace = '\n' + edplace; edplaceval = '\n' + edplaceval}
+
+        edcInfo.push([{text: edplace, color: '#8492A4'}, {text: edplaceval, color: '#3D4857',}]);
+        edcInfo.push([{text:'Специальность', color: '#8492A4'}, {text: edu[i].spec, color: '#3D4857',}]);
+    }
+    if (res_user.no_edc){
+        edcInfo = [[{text:'Без образования', color: '#8492A4'}, {text: '', color: '#3D4857',}]];
+    }
+
+    let tableEdc = [
+        {
+            text:'Образование:',
+            fontSize: 15,
+            lineHeight: 1.5,
+            color: '#8492a4'
+        },
+        {
+            layout: 'noBorders',
+            table: {
+                headerRows: 1,
+                widths: ['auto', '*'],
+                body: edcInfo,
+            }
+        }
+    ];
+
+    let exp = res_user.experience;
+    let expInfo = [];
+    for (let i = 0; i < exp.length; i++) {
+
+        let wplace = 'Место работы';
+        let wplaceval = exp[i].place;
+        if (i > 0){ wplace = '\n' + wplace; wplaceval = '\n' + wplaceval}
+
+        expInfo.push([{text: wplace, color: '#8492A4'}, {text: wplaceval, color: '#3D4857',}]);
+        expInfo.push([{text:'Профессия', color: '#8492A4'}, {text: exp[i].prof, color: '#3D4857',}]);
+        expInfo.push([{text:'Период работы', color: '#8492A4'}, {text: exp[i].stand, color: '#3D4857',}]);
+    }
+    if (res_user.no_exp){
+        expInfo = [[{text:'Без опыта работы', color: '#8492A4'}, {text: '', color: '#3D4857',}]]
+    }
+
+    let tableExp = [
+        {
+            text:'Опыт работы:',
+            fontSize: 15,
+            lineHeight: 1.5,
+            color: '#8492a4'
+        },
+        {
+            layout: 'noBorders',
+            table: {
+                headerRows: 1,
+                widths: ['auto', '*'],
+                body: expInfo,
+            }
+        }
+    ];
+
+    let positionStr = '';
+    for ( let i = 0; i < res_user.position.length; i++){
+        positionStr += res_user.position[i] + ( i < res_user.position.length - 1 ? ', ' : '');
+    }
+
+    let jobStr = '';
+    for ( let i = 0; i < res_user.job.length; i++){
+        jobStr += res_user.job[i] + ( i < res_user.job.length - 1 ? ', ' : '');
+    }
+
+    let cityStr = '';
+    for ( let i = 0; i < res_user.city.length; i++){
+        cityStr += res_user.city[i] + ( i < res_user.city.length - 1 ? ', ' : '');
+    }
+
+
+    let jobInfo = [];
+    if (res_user.salary.length){jobInfo.push([{text:'Зарплата', color: '#8492a4'}, {text: res_user.salary + ' ' + res_user.sal_period, color: '#3D4857',}])}
+    else if(res_user.fixedSalary){jobInfo.push([{text:'Зарплата', color: '#8492a4'}, {text: 'Договорная', color: '#3D4857',}])}
+    if (res_user.job[0].length){jobInfo.push([{text:'Категория', color: '#8492a4'}, {text: jobStr, color: '#3D4857',}])}
+    if (res_user.position.length){jobInfo.push([{text:'Должность', color: '#8492a4'}, {text: positionStr, color: '#3D4857',}])}
+    if (res_user.city[0].length){jobInfo.push([{text:'Город', color: '#8492a4'}, {text: cityStr, color: '#3D4857',}])}
+
+    console.log(res_user.job);
+
+    let tableJob = [
+        {
+            text:'Желаемая работа:',
+            fontSize: 15,
+            lineHeight: 1.5,
+            color: '#8492a4'
+        },
+        {
+            layout: 'noBorders',
+            table: {
+                headerRows: 1,
+                widths: ['auto', '*'],
+                body: jobInfo,
+            }
+        }
+    ];
+
+    if(contactInfo.length){tables.push(tableContact);}
+    if(docInfo.length){tables.push(tableDoc);}
+    if(mainInfo.length){tables.push(tableMain);}
+    if(edcInfo.length){tables.push(tableEdc);}
+    if(expInfo.length){tables.push(tableExp);}
+    if(jobInfo.length){tables.push(tableJob);}
+
+    let line = linePdf();
+
     let city = res_user.city;
     let position = res_user.position;
     let job = res_user.job;
@@ -160,197 +310,97 @@ async function createPdf(){
         //     image: await this.getBase64ImageFromURL('./Template/header.png'),
         // },
         content: [
-            { 
-                columns: [ 
-                    { 
+            {
+                columns: [
+                    {
                         width: 150,
                         image: await this.getBase64ImageFromURL(imgPath),
-                    }, 
-                    { 
+                    },
+                    {
                         width: 'auto',
                         type: 'none',
                         ol: [
-                                {
-                                    text: 'this date',
-                                    style: 'textHeader'
-                                },
-                                {
-                                    text: res_user.f_name + ' ' + res_user.l_name,
-                                    margin: [0, 0, 0, 20],
-                                    color: '#3D4857',
-                                    fontSize: 30,
-                                    bold: true
-                                },
-                                {
-                                    text: 'Короткое описание:',
-                                    style: 'textHeader'
-                                },
-                                {
-                                    text: res_user.s_desc,
-                                    margin: [0, 0, 0, 15],
-                                    color: '#3D4857',
-                                    bold: true,
-                                    fontSize: 20
-                                },
-                                {
-                                    columns: [
-                                        {
-                                            width: 'auto',
-                                            text: (res_user.emp_type.length ? 'Тип занятости: ' : ''),
-                                            style: 'textHeader'
-                                        },
-                                        {
-                                            width: 'auto',
-                                            text:  (res_user.emp_type.length ? res_user.emp_type : ''), 
-                                            style: 'textHeader',
-                                            color: '#3D4857'
-                                        }
-                                    ],
-                                    columnGap: 10
-                                },
-                                {
-                                    columns: [
-                                        {
-                                            width: 'auto',
-                                            text:'Год рождения: ', 
-                                            style:'textHeader'
-                                        },
-                                        {
-                                            width: 'auto',
-                                            text: res_user.age,
-                                            style:'textHeader',
-                                            color: '#3D4857'
-                                        },
-                                        {
-                                            width: 'auto',
-                                            text:'Страна проживания: ', 
-                                            style:'textHeader'
-                                        },
-                                        {
-                                            width: 'auto',
-                                            text: res_user.country,
-                                            style:'textHeader',
-                                            color: '#3D4857'
-                                        }
-                                    ],
-                                    columnGap: 10
-                                }
+                            {
+                                text: 'this date',
+                                style: 'textHeader'
+                            },
+                            {
+                                text: res_user.f_name + ' ' + res_user.l_name,
+                                margin: [0, 0, 0, 20],
+                                color: '#3D4857',
+                                fontSize: 30,
+                                bold: true
+                            },
+                            {
+                                text: 'Короткое описание:',
+                                style: 'textHeader'
+                            },
+                            {
+                                text: res_user.s_desc,
+                                margin: [0, 0, 0, 15],
+                                color: '#3D4857',
+                                bold: true,
+                                fontSize: 20
+                            },
+                            {
+                                columns: [
+                                    {
+                                        width: 'auto',
+                                        text: (res_user.emp_type.length ? 'Тип занятости: ' : ''),
+                                        style: 'textHeader'
+                                    },
+                                    {
+                                        width: 'auto',
+                                        text:  (res_user.emp_type.length ? res_user.emp_type : ''),
+                                        style: 'textHeader',
+                                        color: '#3D4857'
+                                    }
+                                ],
+                                columnGap: 10
+                            },
+                            {
+                                columns: [
+                                    {
+                                        width: 'auto',
+                                        text:'Год рождения: ',
+                                        style:'textHeader'
+                                    },
+                                    {
+                                        width: 'auto',
+                                        text: res_user.age,
+                                        style:'textHeader',
+                                        color: '#3D4857'
+                                    },
+                                    {
+                                        width: 'auto',
+                                        text:'Страна проживания: ',
+                                        style:'textHeader'
+                                    },
+                                    {
+                                        width: 'auto',
+                                        text: res_user.country,
+                                        style:'textHeader',
+                                        color: '#3D4857'
+                                    }
+                                ],
+                                columnGap: 10
+                            }
                         ]
-                    } 
-                ] 
+                    }
+                ]
             },
             line,
-            tableContact,
-            tableSocial,
-            {
-                text:(res_user.country.length ? '\nСтрана проживания: ' + res_user.country : '') +
-                    (res_user.phone.length ? '\nТелефон: ' + res_user.phone : '') +
-                    (res_user.email.length ? '\nEmail: ' + res_user.email : '') +
-                    (res_user.age.length ? '\nГод рождения: ' + res_user.age : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (res_user.has_dl ? '\nВодительские права: ' + res_user.driver : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (socialUl.length ? '\nСоциальные сети:' : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                ul: socialUl,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: `\nОсновная информация`,
-                style: 'subheader'
-            },
-            {
-                text: (position.length ? '\nДолжность:' : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                ul: position,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (job[0].length ? '\nКатегория:' : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                ul: job,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (city[0].length ? '\nЖелаемый город работы: ' : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                ul: city,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (langsUl.length ? '\nВладение языками:' : ''),
-                style: [ 'mainStyle' ],
-            },
-            {
-                ul: langsUl,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (res_user.fixedSalary ? '\nЖелаемая заработная плата: Договорная' : (salary.length ? '\nЖелаемая заработная плата: ' + salary : '' )),
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (res_user.fixedSalary ? '' :(salary.length ? 'Период заработной платы: ' + sal_period : '')),
-                style: [ 'mainStyle' ],
-            },
-
-            {
-                text: (res_user.hasDoc ? '\nДокументы: ': '') + (res_user.bio ? 'Биометрия': '') +
-                    (res_user.visa ? 'Рабочая виза': '') + (res_user.gcart ? 'Green card': ''),
-                style: ['mainStyle' ],
-            },
-            {
-                text: (res_user.no_exp ? '\nОпыт работы': (expUl.length ? '\nОпыт работы: ' : '')),
-                style: ['subheader', 'mainStyle' ],
-            },
-            {
-                text: (res_user.no_exp ? 'Без опыта работы' : ''),
-                style: [ 'mainStyle' ]
-            },
-            {
-                ul : expUl,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: (res_user.no_edc ? '\nОбразование: ' :(eduUl.length ? '\nОбразование: ' : '')),
-                style: ['subheader', 'mainStyle' ],
-            },
-            {
-                text: (res_user.no_edc ? 'Без образования' : ''),
-                style: [ 'mainStyle' ]
-            },
-            {
-                ul : eduUl,
-                style: [ 'mainStyle' ],
-            },
-            {
-                text: '\nДополнительная информация',
-                style: ['subheader', 'mainStyle' ],
-            },
-            {
-                text: (res_user.emp_type.length ? 'Тип занятости: ' + res_user.emp_type : ''),
-                style: [ 'mainStyle' ],
-            },
+            tablesPdf(tables),
             {
                 text: (res_user.desc.length ? '\nОписание': ''),
-                style: ['subheader', 'mainStyle' ],
+                fontSize: 15,
+                lineHeight: 1.5,
+                color: '#8492a4'
             },
 
             {
                 text: (res_user.desc.length ? res_user.desc : ''),
-                style: [ 'mainStyle' ],
+                color: '#3D4857',
             }
         ],
         styles: {
