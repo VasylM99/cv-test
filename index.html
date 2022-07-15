@@ -754,10 +754,8 @@
 
 <script>
 
-    var pdf = new jsPDF('p', 'pt', 'letter');
-    pdf.addHTML(document.querySelector('#cv-form'), function () {
-        console.log('start');
-        pdf.save('Test.pdf');
+    html2canvas(document.querySelector(".cv-form")).then(canvas => {
+        document.body.appendChild(canvas)
     });
 
     function genPDF()
