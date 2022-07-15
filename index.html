@@ -753,9 +753,18 @@
 <script src="./build/jspdf.min.js"></script>
 
 <script>
-
-    html2canvas(document.querySelector(".cv-form")).then(canvas => {
-        document.body.appendChild(canvas)
+    
+    html2canvas(document.querySelector('.cv-form'), {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+                content: [{
+                    image: data,
+                    width: 500
+                }]
+            };
+            pdfMake.createPdf(docDefinition).download("Roster.pdf");
+        }
     });
 
     function genPDF()
