@@ -1,3 +1,17 @@
+html2canvas(document.querySelector('.cv-form'), {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+                content: [{
+                    image: data,
+                    width: 500
+                }]
+            };
+            pdfMake.createPdf(docDefinition).download("Roster.pdf");
+        }
+});
+
+
 function linePdf(){
     let line = {
         table : {
