@@ -748,5 +748,64 @@
 <script src="./cv_word.js"></script>
 <script src="./style.js"></script>
 
+<script src="./build/html2canvas.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./build/jspdf.min.js"></script>
+
+<script>
+
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    pdf.addHTML(document.querySelector('#cv-form'), function () {
+        console.log('start');
+        pdf.save('Test.pdf');
+    });
+
+    function genPDF()
+    {
+        html2canvas(document.body,{
+            onrendered:function(canvas){
+
+                var img=canvas.toDataURL("image/png");
+                var doc = new jsPDF();
+                doc.addImage(img,'JPEG',20,20);
+                doc.save('test.pdf');
+            }
+
+        });
+
+    }
+    genPDF();
+
+    // var doc = new jsPDF();
+    // var elementHTML = $('#cv-form').html();
+    // var specialElementHandlers = {
+    //     '#elementH': function (element, renderer) {
+    //         return true;
+    //     }
+    // };
+    // doc.fromHTML(elementHTML, 15, 15, {
+    //     'width': 170,
+    //     'elementHandlers': specialElementHandlers
+    // });
+    //
+    // // Save the PDF
+    // doc.save('sample-document.pdf');
+
+    // html2canvas(document.getElementById('cv-form'), {
+    //     onrendered: function (canvas) {
+    //         var data = canvas.toDataURL();
+    //         var docDefinition = {
+    //             content: [{
+    //                 image: data,
+    //                 width: 500,
+    //             }]
+    //         };
+    //         pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
+    //     }
+    // });
+
+</script>
+
+
 </body>
 </html>
