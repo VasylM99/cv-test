@@ -757,12 +757,17 @@
 
 <script>
     function makePDF1() {
-        html2canvas(document.querySelector(".cv-form")).then(canvas => {
+        html2canvas(document.querySelector(".cv-form"), {
+            scale:1,
+            windowWidth: 1024,
+            windowHeight: 768,
+        }).then(canvas => {
+
 
             var data = canvas.toDataURL("image/png");
 
             var doc = new jsPDF();
-            doc.addImage(data, 'JPEG', 0, 0, 210, 302);
+            doc.addImage(data, 'JPEG', 0, 0);
             doc.save('test.pdf');
 
 
@@ -777,7 +782,8 @@
     }
     function makePDF2() {
         html2canvas(document.querySelector(".cv-form")).then(canvas => {
-
+            canvas.setAttribute('width', 210);
+            canvas.setAttribute('height', 302);
             var data = canvas.toDataURL("image/png");
 
             let docDefinition = {
